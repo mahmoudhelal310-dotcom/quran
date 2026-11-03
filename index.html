@@ -313,6 +313,11 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.02);
     }
 
+    .surah-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 14px rgba(0,0,0,0.06);
+    }
+
     .surah-info {
       display: flex;
       align-items: center;
@@ -1175,11 +1180,33 @@
     }
 
     const locations = [
-      { country: "مصر", enCountry: "Egypt", method: 5, cities: [{ ar: "القاهرة", en: "Cairo" }, { ar: "الإسكندرية", en: "Alexandria" }, { ar: "الجيزة", en: "Giza" }, { ar: "المنصورة", en: "Mansoura" }, { ar: "أسيوط", en: "Asyut" }] },
-      { country: "السعودية", enCountry: "Saudi Arabia", method: 4, cities: [{ ar: "مكة المكرمة", en: "Makkah" }, { ar: "المدينة المنورة", en: "Madinah" }, { ar: "الرياض", en: "Riyadh" }, { ar: "جدة", en: "Jeddah" }] },
-      { country: "الإمارات", enCountry: "United Arab Emirates", method: 4, cities: [{ ar: "أبوظبي", en: "Abu Dhabi" }, { ar: "دبي", en: "Dubai" }] },
+      { country: "مصر", enCountry: "Egypt", method: 5, cities: [
+          { ar: "القاهرة", en: "Cairo" }, { ar: "الإسكندرية", en: "Alexandria" }, { ar: "الجيزة", en: "Giza" },
+          { ar: "المنصورة", en: "Mansoura" }, { ar: "أسيوط", en: "Asyut" }, { ar: "طنطا", en: "Tanta" },
+          { ar: "أسوان", en: "Aswan" }, { ar: "بورسعيد", en: "Port Said" }, { ar: "الإسماعيلية", en: "Ismailia" },
+          { ar: "السويس", en: "Suez" }, { ar: "الأقصر", en: "Luxor" }, { ar: "قنا", en: "Qena" },
+          { ar: "المنيا", en: "Minya" }, { ar: "سوهاج", en: "Sohag" }, { ar: "الفيوم", en: "Faiyum" },
+          { ar: "بني سويف", en: "Beni Suef" }, { ar: "الزقازيق", en: "Zagazig" }, { ar: "دمياط", en: "Damietta" },
+          { ar: "شبين الكوم", en: "Shibin El Kom" }, { ar: "بنها", en: "Banha" }, { ar: "دمنهور", en: "Damanhour" },
+          { ar: "كفر الشيخ", en: "Kafr El Sheikh" }, { ar: "العريش", en: "Arish" }, { ar: "مرسى مطروح", en: "Mersa Matruh" },
+          { ar: "الغردقة", en: "Hurghada" }, { ar: "شرم الشيخ", en: "Sharm El Sheikh" }
+        ]
+      },
+      { country: "السعودية", enCountry: "Saudi Arabia", method: 4, cities: [
+          { ar: "مكة المكرمة", en: "Makkah" }, { ar: "المدينة المنورة", en: "Madinah" },
+          { ar: "الرياض", en: "Riyadh" }, { ar: "جدة", en: "Jeddah" }, { ar: "الدمام", en: "Dammam" },
+          { ar: "أبها", en: "Abha" }, { ar: "تبوك", en: "Tabuk" }
+        ]
+      },
+      { country: "الإمارات", enCountry: "United Arab Emirates", method: 4, cities: [
+          { ar: "أبوظبي", en: "Abu Dhabi" }, { ar: "دبي", en: "Dubai" }, { ar: "الشارقة", en: "Sharjah" }
+        ]
+      },
       { country: "الكويت", enCountry: "Kuwait", method: 4, cities: [{ ar: "مدينة الكويت", en: "Kuwait City" }] },
-      { country: "فلسطين", enCountry: "Palestine", method: 4, cities: [{ ar: "القدس الشريف", en: "Jerusalem" }, { ar: "غزة", en: "Gaza" }] }
+      { country: "فلسطين", enCountry: "Palestine", method: 4, cities: [
+          { ar: "القدس الشريف", en: "Jerusalem" }, { ar: "غزة", en: "Gaza" }, { ar: "رام الله", en: "Ramallah" }, { ar: "نابلس", en: "Nablus" }
+        ]
+      }
     ];
 
     function initLocationSelector() {
