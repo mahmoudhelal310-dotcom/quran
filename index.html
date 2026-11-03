@@ -1031,6 +1031,10 @@
           <input type="text" id="searchInput" placeholder="ابحث باسم السورة (مثلاً: الكهف)...">
         </div>
       </div>
+      <div class="reciter-toolbar">
+        <span id="reciterNameTag">تلاوة بصوت: الشيخ خالد القحطاني</span>
+        <a id="downloadFullZipBtn" class="btn btn-play" href="#" target="_blank" title="تحميل المصحف كامل بصوت الشيخ">📥 تحميل المصحف كاملاً (ZIP)</a>
+      </div>
       <div class="surah-grid" id="surahContainer"></div>
     </div>
 
@@ -1220,7 +1224,7 @@
     </div>
   </footer>
 
-  <!-- نافذة القراءة والتفسير مع أزرار التحكم بالخط -->
+  <!-- نافذة القراءة والتفسير مع أدوات تكبير الخط والنسخ -->
   <div class="modal-overlay" id="readerModal">
     <div class="modal-content">
       <div class="modal-header">
@@ -1286,20 +1290,20 @@
   </div>
 
   <script>
-    // بيانات القراء
+    // بيانات القراء وروابط التحميل الكامل (Archive/MP3Quran)
     const reciters = [
-      { name: "الشيخ خالد القحطاني", server: "https://server10.mp3quran.net/qht/" },
-      { name: "الشيخ مشاري راشد العفاسي", server: "https://server8.mp3quran.net/afs/" },
-      { name: "الشيخ عبد الباسط عبد الصمد (مرتل)", server: "https://server7.mp3quran.net/basit/" },
-      { name: "الشيخ محمود خليل الحصري", server: "https://server13.mp3quran.net/husr/" },
-      { name: "الشيخ ماهر المعيقلي", server: "https://server12.mp3quran.net/maher/" },
-      { name: "الشيخ سعد الغامدي", server: "https://server7.mp3quran.net/s_gmd/" },
-      { name: "الشيخ أحمد بن علي العجمي", server: "https://server10.mp3quran.net/ajm/" },
-      { name: "الشيخ ياسر الدوسري", server: "https://server11.mp3quran.net/yasser/" },
-      { name: "الشيخ ناصر القطامي", server: "https://server6.mp3quran.net/qtm/" },
-      { name: "الشيخ محمد صديق المنشاوي (مرتل)", server: "https://server10.mp3quran.net/minsh/" },
-      { name: "الشيخ فارس عباد", server: "https://server8.mp3quran.net/frs_a/" },
-      { name: "الشيخ إدريس أبكر", server: "https://server6.mp3quran.net/abkr/" }
+      { name: "الشيخ خالد القحطاني", server: "https://server10.mp3quran.net/qht/", zip: "https://archive.org/download/Khaled_Al-Qahtani_64kbps/Khaled_Al-Qahtani_64kbps_vbr_mp3.zip" },
+      { name: "الشيخ مشاري راشد العفاسي", server: "https://server8.mp3quran.net/afs/", zip: "https://archive.org/download/Mishary_Rashid_Alafasy_64kbps/Mishary_Rashid_Alafasy_64kbps_vbr_mp3.zip" },
+      { name: "الشيخ عبد الباسط عبد الصمد (مرتل)", server: "https://server7.mp3quran.net/basit/", zip: "https://archive.org/download/Abdul_Basit_Murattal_64kbps/Abdul_Basit_Murattal_64kbps_vbr_mp3.zip" },
+      { name: "الشيخ محمود خليل الحصري", server: "https://server13.mp3quran.net/husr/", zip: "https://archive.org/download/Mahmoud_Khalil_Al-Hussary_64kbps/Mahmoud_Khalil_Al-Hussary_64kbps_vbr_mp3.zip" },
+      { name: "الشيخ ماهر المعيقلي", server: "https://server12.mp3quran.net/maher/", zip: "https://archive.org/download/Maher_Al-Muaiqly_64kbps/Maher_Al-Muaiqly_64kbps_vbr_mp3.zip" },
+      { name: "الشيخ سعد الغامدي", server: "https://server7.mp3quran.net/s_gmd/", zip: "https://archive.org/download/Saad_Al-Ghamdi_64kbps/Saad_Al-Ghamdi_64kbps_vbr_mp3.zip" },
+      { name: "الشيخ أحمد بن علي العجمي", server: "https://server10.mp3quran.net/ajm/", zip: "https://archive.org/download/Ahmed_Al-Ajmy_64kbps/Ahmed_Al-Ajmy_64kbps_vbr_mp3.zip" },
+      { name: "الشيخ ياسر الدوسري", server: "https://server11.mp3quran.net/yasser/", zip: "https://archive.org/download/Yasser_Al-Dosari_64kbps/Yasser_Al-Dosari_64kbps_vbr_mp3.zip" },
+      { name: "الشيخ ناصر القطامي", server: "https://server6.mp3quran.net/qtm/", zip: "https://archive.org/download/Nasser_Al-Qatami_64kbps/Nasser_Al-Qatami_64kbps_vbr_mp3.zip" },
+      { name: "الشيخ محمد صديق المنشاوي (مرتل)", server: "https://server10.mp3quran.net/minsh/", zip: "https://archive.org/download/Muhammad_Siddiq_Al-Minshawi_Murattal_64kbps/Muhammad_Siddiq_Al-Minshawi_Murattal_64kbps_vbr_mp3.zip" },
+      { name: "الشيخ فارس عباد", server: "https://server8.mp3quran.net/frs_a/", zip: "https://archive.org/download/Fares_Abbad_64kbps/Fares_Abbad_64kbps_vbr_mp3.zip" },
+      { name: "الشيخ إدريس أبكر", server: "https://server6.mp3quran.net/abkr/", zip: "https://archive.org/download/Idrees_Abkar_64kbps/Idrees_Abkar_64kbps_vbr_mp3.zip" }
     ];
 
     const surahNames = [
@@ -1323,11 +1327,14 @@
     let currentAyahTextForShare = "";
     let currentTafsirTextForShare = "";
 
+    // عناصر الصفحة
     const container = document.getElementById("surahContainer");
     const audioPlayer = document.getElementById("audioPlayer");
     const currentTitle = document.getElementById("currentSurahTitle");
     const searchInput = document.getElementById("searchInput");
     const reciterSelect = document.getElementById("reciterSelect");
+    const reciterNameTag = document.getElementById("reciterNameTag");
+    const downloadFullZipBtn = document.getElementById("downloadFullZipBtn");
 
     const readerModal = document.getElementById("readerModal");
     const modalSurahTitle = document.getElementById("modalSurahTitle");
@@ -1341,6 +1348,7 @@
     const bookmarkText = document.getElementById("bookmarkText");
     const ayahBanner = document.getElementById("ayahBanner");
 
+    // عناصر الإذاعة
     let radioPlaying = false;
     const liveRadioAudio = document.getElementById("liveRadioAudio");
     const radioPlayBtn = document.getElementById("radioPlayBtn");
@@ -1348,6 +1356,7 @@
     const copyBtn = document.getElementById("copyBtn");
     const fbLink = document.getElementById("fbLink");
 
+    // ملء قائمة الشيوخ
     reciters.forEach((reciter, index) => {
       const option = document.createElement("option");
       option.value = index;
@@ -1355,6 +1364,13 @@
       reciterSelect.appendChild(option);
     });
 
+    function updateReciterToolbar() {
+      const reciter = reciters[reciterSelect.value];
+      reciterNameTag.innerText = `تلاوة بصوت: ${reciter.name}`;
+      downloadFullZipBtn.href = reciter.zip;
+    }
+
+    // رسم بطاقات السور
     function renderSurahs() {
       const filter = searchInput.value.trim();
       const currentReciter = reciters[reciterSelect.value];
@@ -1365,6 +1381,7 @@
         const id = index + 1;
         const formattedId = String(id).padStart(3, '0');
         const audioUrl = `${currentReciter.server}${formattedId}.mp3`;
+        const displayName = `سورة ${name} - ${currentReciter.name}`;
 
         const card = document.createElement("div");
         card.className = "surah-card";
@@ -1381,6 +1398,7 @@
         `;
         container.appendChild(card);
       });
+      updateReciterToolbar();
     }
 
     function playSurahByIndex(index) {
@@ -1404,18 +1422,22 @@
       if (currentSurahIndex > 0) playSurahByIndex(currentSurahIndex - 1);
     }
 
-    let repeatMode = 'all';
+    let repeatMode = 'all'; // 'all', 'one', 'off'
+
     function toggleRepeatMode() {
       const btn = document.getElementById("repeatModeBtn");
       if (repeatMode === 'all') {
         repeatMode = 'one';
         btn.innerText = "🔂";
+        btn.title = "وضع التكرار: إعادة تشغيل نفس السورة الحالية";
       } else if (repeatMode === 'one') {
         repeatMode = 'off';
         btn.innerText = "⏹️";
+        btn.title = "وضع التكرار: إيقاف التشغيل بعد انتهاء السورة";
       } else {
         repeatMode = 'all';
         btn.innerText = "🔁";
+        btn.title = "وضع التكرار: تشغيل متتالي لجميع السور";
       }
     }
 
@@ -1428,6 +1450,7 @@
       }
     });
 
+    // استماع لآية مفردة مع مصادر بديلة
     let singleAyahAudio = null;
     let activeAyahAudioBtn = null;
 
@@ -1436,6 +1459,7 @@
         singleAyahAudio = document.getElementById("singleAyahAudioPlayer") || new Audio();
       }
 
+      // إذا كانت نفس الآية تعمل بالفعل، نقوم بإيقافها
       if (activeAyahAudioBtn && activeAyahAudioBtn === btnEl && !singleAyahAudio.paused) {
         singleAyahAudio.pause();
         btnEl.innerText = "🔊";
@@ -1443,16 +1467,20 @@
         return;
       }
 
+      // إيقاف أي مشغل صوت آخر (السور أو الإذاعة) لمنع تداخل الصوت
       if (audioPlayer && !audioPlayer.paused) audioPlayer.pause();
       if (radioPlaying) toggleRadioPlay();
 
       if (activeAyahAudioBtn) activeAyahAudioBtn.innerText = "🔊";
+
       activeAyahAudioBtn = btnEl;
       btnEl.innerText = "⏳";
 
+      // رابط خادم EveryAyah المباشر برقم السورة ورقم الآية
       const sNum = String(surahId).padStart(3, '0');
       const aNum = String(ayahNumInSurah).padStart(3, '0');
       const everyAyahUrl = `https://everyayah.com/data/Alafasy_128kbps/${sNum}${aNum}.mp3`;
+      const cdnUrl = `https://cdn.islamic.network/quran/audio/128/ar.alafasy/${globalAyahNum}.mp3`;
 
       singleAyahAudio.src = everyAyahUrl;
       singleAyahAudio.load();
@@ -1460,22 +1488,40 @@
       singleAyahAudio.play().then(() => {
         btnEl.innerText = "⏸️";
       }).catch(() => {
-        btnEl.innerText = "🔊";
-        activeAyahAudioBtn = null;
-        alert("تعذر تشغيل صوت الآية حالياً.");
+        // تجربة الخادم الاحتياطي
+        singleAyahAudio.src = cdnUrl;
+        singleAyahAudio.load();
+        singleAyahAudio.play().then(() => {
+          btnEl.innerText = "⏸️";
+        }).catch(() => {
+          btnEl.innerText = "🔊";
+          activeAyahAudioBtn = null;
+          alert("تعذر تشغيل صوت الآية حالياً، يرجى التحقق من اتصال الإنترنت.");
+        });
       });
 
       singleAyahAudio.onended = () => {
         btnEl.innerText = "🔊";
         activeAyahAudioBtn = null;
       };
+
+      singleAyahAudio.onerror = () => {
+        btnEl.innerText = "🔊";
+        activeAyahAudioBtn = null;
+      };
     }
 
+    // ==========================================
+    // التحكم بحجم الخط
+    // ==========================================
     function changeFontSize(delta) {
       currentReaderFontSize = Math.max(1.1, Math.min(2.4, currentReaderFontSize + (delta * 0.15)));
       modalSurahBody.style.fontSize = `${currentReaderFontSize}rem`;
     }
 
+    // ==========================================
+    // القراءة والتفسير والنسخ والمشاركة
+    // ==========================================
     let currentSurahAyahsMap = {};
 
     async function readSurah(surahId, name) {
@@ -1540,6 +1586,8 @@
 
     function copyAyahWithTafsir() {
       const fullText = `﴿ ${currentAyahTextForShare} ﴾\n\nالتفسير الميسر:\n${currentTafsirTextForShare}\n\n— من بوابة القرآن الكريم`;
+
+      // محاولة النسخ بالطريقة الحديثة أولاً
       if (navigator.clipboard && window.isSecureContext) {
         navigator.clipboard.writeText(fullText).then(() => {
           alert("✅ تم نسخ الآية وتفسيرها بنجاح!");
@@ -1551,22 +1599,32 @@
       }
     }
 
+    // طريقة بديلة تعمل على جميع المتصفحات والهواتف وتفتح حتى على الروابط المحلية file://
     function fallbackCopyText(text) {
-      const textArea = document.createElement("textarea");
-      textArea.value = text;
-      textArea.style.position = "fixed";
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
       try {
-        document.execCommand('copy');
-        alert("✅ تم نسخ الآية وتفسيرها بنجاح!");
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        textArea.style.position = "fixed";
+        textArea.style.left = "-999999px";
+        textArea.style.top = "-999999px";
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        const successful = document.execCommand('copy');
+        document.body.removeChild(textArea);
+        if (successful) {
+          alert("✅ تم نسخ الآية وتفسيرها بنجاح!");
+        } else {
+          prompt("انسخ النص التالي:", text);
+        }
       } catch (err) {
         prompt("انسخ النص التالي:", text);
       }
-      document.body.removeChild(textArea);
     }
 
+    // ==========================================
+    // إنشاء ومشاركة بطاقة الآية والتفسير كصورة ستوري حقيقية
+    // ==========================================
     let currentShareSurahName = "";
     let currentShareAyahNum = "";
     let generatedStoryBlob = null;
@@ -1583,8 +1641,14 @@
       ctx.lineTo(x, y + radius);
       ctx.quadraticCurveTo(x, y, x + radius, y);
       ctx.closePath();
-      if (fillStyle) { ctx.fillStyle = fillStyle; ctx.fill(); }
-      if (strokeStyle) { ctx.strokeStyle = strokeStyle; ctx.stroke(); }
+      if (fillStyle) {
+        ctx.fillStyle = fillStyle;
+        ctx.fill();
+      }
+      if (strokeStyle) {
+        ctx.strokeStyle = strokeStyle;
+        ctx.stroke();
+      }
     }
 
     function wrapCanvasText(ctx, text, x, y, maxWidth, lineHeight) {
@@ -1592,6 +1656,7 @@
       const words = text.split(' ');
       let line = '';
       const lines = [];
+
       for (let n = 0; n < words.length; n++) {
         const testLine = line + words[n] + ' ';
         const metrics = ctx.measureText(testLine);
@@ -1603,6 +1668,7 @@
         }
       }
       lines.push(line.trim());
+
       for (let k = 0; k < lines.length; k++) {
         ctx.fillText(lines[k], x, y + (k * lineHeight));
       }
@@ -1610,53 +1676,117 @@
     }
 
     async function generateAyahStoryBlob() {
+      // ننتظر تحميل الخطوط إن وجدت
       if (document.fonts && document.fonts.ready) {
         try { await document.fonts.ready; } catch(e){}
       }
+
       const canvas = document.createElement('canvas');
       canvas.width = 1080;
       canvas.height = 1920;
       const ctx = canvas.getContext('2d');
 
+      // 1. خلفية متدرجة خضراء زمردية داكنة فخمة
       const bgGrad = ctx.createLinearGradient(0, 0, 1080, 1920);
       bgGrad.addColorStop(0, '#06170f');
-      bgGrad.addColorStop(0.5, '#0b261a');
+      bgGrad.addColorStop(0.3, '#0b261a');
+      bgGrad.addColorStop(0.7, '#143827');
       bgGrad.addColorStop(1, '#05140d');
       ctx.fillStyle = bgGrad;
       ctx.fillRect(0, 0, 1080, 1920);
 
+      // زخارف دائرية رقيقة بالخلفية
+      ctx.strokeStyle = 'rgba(212, 175, 55, 0.08)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(540, 960, 480, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.beginPath();
+      ctx.arc(540, 960, 520, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // 2. إطار مزدوج ذهبي أنيق
       ctx.strokeStyle = '#d4af37';
       ctx.lineWidth = 4;
       ctx.strokeRect(55, 55, 970, 1810);
 
+      ctx.strokeStyle = 'rgba(212, 175, 55, 0.35)';
+      ctx.lineWidth = 1.5;
+      ctx.strokeRect(70, 70, 940, 1780);
+
+      // أركان ذهبية مزخرفة
+      ctx.fillStyle = '#d4af37';
+      [[55, 55], [1025, 55], [55, 1865], [1025, 1865]].forEach(([cx, cy]) => {
+        ctx.beginPath();
+        ctx.arc(cx, cy, 9, 0, Math.PI * 2);
+        ctx.fill();
+      });
+
+      // 3. الترويسة العلوية
       ctx.textAlign = 'center';
       ctx.fillStyle = '#d4af37';
       ctx.font = 'bold 44px Cairo, sans-serif';
       ctx.fillText('بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ', 540, 185);
 
+      // اسم السورة ورقم الآية
       ctx.fillStyle = '#ffffff';
       ctx.font = 'bold 38px Cairo, sans-serif';
       const surahTag = currentShareSurahName ? `${currentShareSurahName} — الآية (${currentShareAyahNum})` : 'آية مباركة';
       ctx.fillText(surahTag, 540, 265);
 
+      // خط فاصل ذهبي
+      ctx.strokeStyle = '#d4af37';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(340, 305);
+      ctx.lineTo(740, 305);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.arc(540, 305, 7, 0, Math.PI * 2);
+      ctx.fillStyle = '#d4af37';
+      ctx.fill();
+
+      // 4. بطاقة الآية الكريمة
       drawRoundedBox(ctx, 105, 360, 870, 530, 24, 'rgba(255, 255, 255, 0.05)', 'rgba(212, 175, 55, 0.3)');
+
       ctx.fillStyle = '#ffd700';
       ctx.font = 'bold 46px Amiri, serif';
       const cleanAyah = currentAyahTextForShare.replace(/^[﴿\s]+|[﴾\s]+$/g, '');
-      wrapCanvasText(ctx, `﴿ ${cleanAyah} ﴾`, 540, 480, 790, 75);
+      const ayahFullText = `﴿ ${cleanAyah} ﴾`;
+      wrapCanvasText(ctx, ayahFullText, 540, 480, 790, 75);
 
+      // 5. بطاقة التفسير الميسر
       drawRoundedBox(ctx, 105, 920, 870, 710, 24, 'rgba(0, 0, 0, 0.3)', 'rgba(212, 175, 55, 0.25)');
+
       ctx.fillStyle = '#d4af37';
       ctx.font = 'bold 36px Cairo, sans-serif';
       ctx.fillText('📖 التفسير الميسر', 540, 995);
+
+      ctx.strokeStyle = 'rgba(212, 175, 55, 0.3)';
+      ctx.beginPath();
+      ctx.moveTo(410, 1020);
+      ctx.lineTo(670, 1020);
+      ctx.stroke();
 
       ctx.fillStyle = '#f1f5f9';
       ctx.font = '33px Cairo, sans-serif';
       wrapCanvasText(ctx, currentTafsirTextForShare, 540, 1090, 790, 54);
 
+      // 6. التذييل والتوثيق والصدقة الجارية
+      ctx.strokeStyle = 'rgba(212, 175, 55, 0.35)';
+      ctx.beginPath();
+      ctx.moveTo(180, 1690);
+      ctx.lineTo(900, 1690);
+      ctx.stroke();
+
       ctx.fillStyle = '#80ed99';
       ctx.font = 'bold 32px Cairo, sans-serif';
       ctx.fillText('🌿 صدقة جارية — لا تنسونا من صالح دعائكم', 540, 1745);
+
+      ctx.fillStyle = '#cbd5e1';
+      ctx.font = '28px Cairo, sans-serif';
+      ctx.fillText('بوابة القرآن الكريم الشاملة | by Mahmoud Helal', 540, 1805);
 
       return new Promise((resolve) => {
         canvas.toBlob((blob) => resolve(blob), 'image/png');
@@ -1665,16 +1795,45 @@
 
     async function shareAyahWithTafsir() {
       const shareBtn = document.getElementById("shareStoryBtn");
+      const originalText = shareBtn ? shareBtn.innerText : "";
       if (shareBtn) shareBtn.innerText = "⏳ جاري تصميم الصورة...";
+
       try {
         generatedStoryBlob = await generateAyahStoryBlob();
         const previewUrl = URL.createObjectURL(generatedStoryBlob);
+
+        // وضع الصورة داخل نافذة المعاينة
         document.getElementById("storyPreviewImg").src = previewUrl;
         document.getElementById("storyPreviewModal").style.display = "flex";
+
+        // إذا كان الجهاز يدعم مشاركة الملفات مباشرة، نفعّل خيار المشاركة
+        const file = new File([generatedStoryBlob], `ayah_story_${Date.now()}.png`, { type: 'image/png' });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          document.getElementById("directShareBtn").style.display = "inline-flex";
+        }
       } catch (err) {
-        alert("حدث خطأ أثناء إعداد الصورة.");
+        alert("حدث خطأ أثناء إعداد الصورة، يرجى المحاولة مرة أخرى.");
       } finally {
-        if (shareBtn) shareBtn.innerText = "📸 مشاركة صورة ستوري";
+        if (shareBtn) shareBtn.innerText = originalText;
+      }
+    }
+
+    async function shareStoryImageDirectly() {
+      if (!generatedStoryBlob) return;
+      try {
+        const file = new File([generatedStoryBlob], `ayah_story_${Date.now()}.png`, { type: 'image/png' });
+        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+          await navigator.share({
+            files: [file],
+            title: `آية وتفسير - ${currentShareSurahName}`
+          });
+        } else {
+          downloadStoryImage();
+        }
+      } catch (e) {
+        if (e.name !== 'AbortError') {
+          downloadStoryImage();
+        }
       }
     }
 
@@ -1686,21 +1845,34 @@
       document.body.appendChild(link);
       link.click();
       document.body.removeChild(link);
-      alert("✅ تم تحميل الصورة بنجاح في جهازك!");
+      alert("✅ تم تحميل الصورة بنجاح في جهازك، يمكنك الآن فتحها ومشاركتها في ستوري واتساب!");
     }
 
     function closeStoryModal() {
       document.getElementById("storyPreviewModal").style.display = "none";
     }
 
-    function closeTafsir() { tafsirBox.style.display = "none"; }
+
+    function closeTafsir() {
+      tafsirBox.style.display = "none";
+    }
+
     function closeModal() {
       readerModal.style.display = "none";
-      if (singleAyahAudio && !singleAyahAudio.paused) singleAyahAudio.pause();
+      if (singleAyahAudio && !singleAyahAudio.paused) {
+        singleAyahAudio.pause();
+      }
+      if (activeAyahAudioBtn) {
+        activeAyahAudioBtn.innerText = "🔊";
+        activeAyahAudioBtn = null;
+      }
     }
 
     function saveCurrentBookmark() {
-      const bookmarkData = { id: activeModalSurahId, name: surahNames[activeModalSurahId - 1] };
+      const bookmarkData = {
+        id: activeModalSurahId,
+        name: surahNames[activeModalSurahId - 1]
+      };
       localStorage.setItem("quran_bookmark", JSON.stringify(bookmarkData));
       alert(`تم حفظ موضع القراءة: سورة ${bookmarkData.name}`);
       checkBookmark();
@@ -1723,35 +1895,76 @@
       }
     }
 
+    // ==========================================
+    // البحث في نص الآيات
+    // ==========================================
     async function searchAyat() {
       const query = document.getElementById("ayahSearchInput").value.trim();
       const resultsContainer = document.getElementById("ayahSearchResults");
-      if (!query) { alert("يرجى كتابة كلمة للبحث."); return; }
-      resultsContainer.innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 20px;">جاري البحث...</div>';
+      if (!query) {
+        alert("يرجى كتابة كلمة للبحث.");
+        return;
+      }
+
+      resultsContainer.innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 20px;">جاري البحث في المصحف الشريف...</div>';
+
       try {
         const res = await fetch(`https://api.alquran.cloud/v1/search/${encodeURIComponent(query)}/all/quran-simple`);
         const json = await res.json();
+
         if (json.code === 200 && json.data && json.data.matches && json.data.matches.length > 0) {
-          resultsContainer.innerHTML = `<div style="margin-bottom:12px; font-weight:bold; color:var(--primary);">عدد النتائج: ${json.data.matches.length}</div>`;
+          // إزالة أي تكرار للآيات لضمان ظهور كل آية مرة واحدة فقط
+          const seen = new Set();
+          const uniqueMatches = [];
           json.data.matches.forEach(item => {
+            const key = `${item.surah.number}:${item.numberInSurah}`;
+            if (!seen.has(key)) {
+              seen.add(key);
+              uniqueMatches.push(item);
+            }
+          });
+
+          resultsContainer.innerHTML = `<div style="margin-bottom:12px; font-weight:bold; color:var(--primary);">عدد الآيات الفريدة المطابقة: ${uniqueMatches.length} آية</div>`;
+          uniqueMatches.forEach(item => {
             const card = document.createElement("div");
             card.className = "search-result-item";
-            card.innerHTML = `<div class="search-result-header"><span>سورة ${item.surah.name}</span><span>آية ${item.numberInSurah}</span></div><div>${item.text}</div>`;
+            card.innerHTML = `
+              <div class="search-result-header">
+                <span>سورة ${item.surah.name}</span>
+                <span>الآية رقم ${item.numberInSurah}</span>
+              </div>
+              <div>${item.text}</div>
+            `;
             resultsContainer.appendChild(card);
           });
         } else {
-          resultsContainer.innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 20px;">لم يتم العثور على نتائج.</div>';
+          resultsContainer.innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 20px;">لم يتم العثور على آيات تطابق كلمة البحث.</div>';
         }
       } catch (e) {
-        resultsContainer.innerHTML = '<div style="text-align: center; color: red; padding: 20px;">خطأ في الاتصال.</div>';
+        resultsContainer.innerHTML = '<div style="text-align: center; color: red; padding: 20px;">حدث خطأ في الاتصال أثناء البحث.</div>';
       }
-    }
-
+    }    // ==========================================
+    // إذاعة القرآن الكريم المباشرة مع روابط احتياطية ذكية
+    // ==========================================
     const radioStationsMap = {
-      makkah: ["https://stream.zeno.fm/f3wvbbqmdg8uv", "https://server02.quran.com.sa/"],
-      cairo: ["https://stream.radiojar.com/8s5u5tpdtwzuv", "https://n03.radiojar.com/8s5u5tpdtwzuv"],
-      tarateel: ["https://backup.qurango.net/radio/tarateel"],
-      roqiah: ["https://backup.qurango.net/radio/roqiah"]
+      makkah: [
+        "https://stream.zeno.fm/f3wvbbqmdg8uv",
+        "https://server02.quran.com.sa/",
+        "https://icecast.media.gov.sa/quran.mp3",
+        "https://backup.qurango.net/radio/salma"
+      ],
+      cairo: [
+        "https://stream.radiojar.com/8s5u5tpdtwzuv",
+        "https://n03.radiojar.com/8s5u5tpdtwzuv"
+      ],
+      tarateel: [
+        "https://backup.qurango.net/radio/tarateel",
+        "https://qurango.net/radio/tarateel"
+      ],
+      roqiah: [
+        "https://backup.qurango.net/radio/roqiah",
+        "https://qurango.net/radio/roqiah"
+      ]
     };
 
     let currentStationKey = "cairo";
@@ -1761,7 +1974,10 @@
       const stationSelect = document.getElementById("radioStationSelect");
       currentStationKey = stationSelect.value;
       currentStreamAttempt = 0;
-      if (radioPlaying) startPlayingCurrentStation();
+
+      if (radioPlaying) {
+        startPlayingCurrentStation();
+      }
     }
 
     function startPlayingCurrentStation() {
@@ -1770,21 +1986,25 @@
       const statusText = document.getElementById("radioStatusText");
 
       statusText.style.display = "block";
-      statusText.innerText = "⏳ جاري الاتصال بالبث...";
+      statusText.innerText = "⏳ جاري الاتصال بالبث المباشر...";
       radioPlayBtn.innerHTML = "⏳ جاري التوصيل...";
 
       liveRadioAudio.src = targetUrl;
       liveRadioAudio.load();
+
       liveRadioAudio.play().then(() => {
         radioPlaying = true;
         radioPlayBtn.innerHTML = "⏸️ إيقاف الإذاعة";
         radioPlayBtn.style.background = "#e74c3c";
         radioPlayBtn.style.color = "#fff";
         statusText.style.display = "none";
+        statusText.innerText = "";
         fbNotice.style.display = "none";
-      }).catch(() => {
+      }).catch((err) => {
+        // تجربة الخادم الاحتياطي تلقائياً
         currentStreamAttempt++;
         if (currentStreamAttempt < streams.length) {
+          statusText.innerText = "⏳ جاري التبديل للمصدر الاحتياطي...";
           setTimeout(startPlayingCurrentStation, 800);
         } else {
           statusText.innerText = "⚠️ تعذر الاتصال بالبث حالياً";
@@ -1815,12 +2035,55 @@
       }
     }
 
+    liveRadioAudio.onerror = function() {
+      if (radioPlaying) {
+        const streams = radioStationsMap[currentStationKey] || radioStationsMap.cairo;
+        currentStreamAttempt++;
+        if (currentStreamAttempt < streams.length) {
+          startPlayingCurrentStation();
+        }
+      }
+    };
+
+    copyBtn.addEventListener("click", () => {
+      navigator.clipboard.writeText(fbLink.href).then(() => {
+        copyBtn.innerText = "تم النسخ ✅";
+        setTimeout(() => { copyBtn.innerText = "نسخ الرابط"; }, 2000);
+      }).catch(() => {
+        alert("فشل النسخ، انسخ الرابط يدويًا");
+      });
+    });
+
+    // الآيات المتغيرة
     const ayat = [
       "﴿ أَلَا بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ ﴾",
       "﴿ وَقُل رَّبِّ زِدْنِي عِلْمًا ﴾",
       "﴿ إِنَّ مَعَ الْعُسْرِ يُسْرًا ﴾",
-      "﴿ فَاذْكُرُونِي أَذْكُرْكُمْ ﴾"
+      "﴿ فَاذْكُرُونِي أَذْكُرْكُمْ ﴾",
+      "﴿ هُدًى لِلْمُتَّقِينَ ﴾",
+      "﴿ وَمَن يَتَّقِ اللَّهَ يَجْعَل لَّهُ مَخْرَجًا ﴾",
+      "﴿ إِنَّ هَذَا الْقُرآنَ يَهْدِي لِلَّتِي هِيَ أَقْوَمُ ﴾",
+      "﴿ وَرَحْمَتِي وَسِعَتْ كُلَّ شَيْءٍ ﴾",
+      "﴿ إِنَّ اللَّهَ غَفُورٌ رَحِيمٌ ﴾",
+      "﴿ قُلْ يَا عِبَادِيَ الَّذِينَ أَسْرَفُوا عَلَى أَنْفُسِهِمْ لَا تَقْنَطُوا مِن رَّحْمَةِ اللَّهِ ﴾",
+      "﴿ رَبِّ اغْفِرْ وَارْحَمْ وَأَنْتَ خَيْرُ الرَّاحِمِينَ ﴾",
+      "﴿ اللَّهُ يَغْفِرُ الذُّنُوبَ جَمِيعًا ﴾",
+      "﴿ وَمَا يُلْقَاهَا إِلَّا الَّذِينَ صَبَرُوا ﴾",
+      "﴿ إِنَّ اللَّهَ مَعَ الصَّابِرِينَ ﴾",
+      "﴿ وَاصْبِرْ وَمَا صَبْرُكَ إِلَّا بِاللَّهِ ﴾",
+      "﴿ فَاسْتَعِينُوا بِالصَّبْرِ وَالصَّلَاةِ ﴾",
+      "﴿ رَبَّنَا أَفْرِغْ عَلَيْنَا صَبْرًا وَتَوَفَّنَا مُسْلِمِينَ ﴾",
+      "﴿ كُلُّ نَفْسٍ ذَائِقَةُ الْمَوْتِ ﴾",
+      "﴿ إِنَّ فِي خَلْقِ السَّمَاوَاتِ وَالْأَرْضِ لَآيَاتٍ لِلْمُؤْمِنِينَ ﴾",
+      "﴿ أَفَلَا يَنْظُرُونَ إِلَى الْإِبِلِ كَيْفَ خُلِقَتْ ﴾",
+      "﴿ أَفَلَا يَتَدَبَّرُونَ الْقُرآنَ ﴾",
+      "﴿ لَا إِلَهَ إِلَّا هُوَ عَلَيْهِ تَوَكَّلْتُ وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ ﴾",
+      "﴿ إِنَّ عِبَادِي لَيْسَ لَكَ عَلَيْهِمْ سُلْطَانٌ ﴾",
+      "﴿ قُلْ هُوَ اللَّهُ أَحَدٌ ﴾",
+      "﴿ اللَّهُ لَا إِلَهَ إِلَّا هُوَ الْحَيُّ الْقَيُّومُ ﴾",
+      "﴿ وَلِلَّهِ الْأَسْمَاءُ الْحُسْنَى فَادْعُوهُ بِهَا ﴾"
     ];
+
     let currentAyahIndex = 0;
     function changeAyah() {
       ayahBanner.style.opacity = 0;
@@ -1833,6 +2096,9 @@
     changeAyah();
     setInterval(changeAyah, 9000);
 
+    // ==========================================
+    // التنقل بين التبويبات الموسعة
+    // ==========================================
     function switchTab(tab) {
       const tabs = ['quran', 'radio', 'search', 'azkar', 'contact'];
       tabs.forEach(t => {
@@ -1841,30 +2107,57 @@
         if (btn) btn.classList.toggle("active", t === tab);
         if (section) section.style.display = (t === tab) ? ((t === 'radio' || t === 'azkar' || t === 'contact') ? 'flex' : 'block') : 'none';
       });
+
+      
+      
       if (tab === 'azkar') loadAzkarCategory('morning');
     }
 
+    // ==========================================
+    // الأذكار
+    // ==========================================
     const azkarData = {
       prophetic_duas: [
-        { text: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَأَعُوذُ بِكَ مِنَ الْعَجْزِ وَالْكَسَلِ.", target: 1 }
+        { text: "اللَّهُمَّ إِنِّي أَعُوذُ بِكَ مِنَ الْهَمِّ وَالْحَزَنِ، وَأَعُوذُ بِكَ مِنَ الْعَجْزِ وَالْكَسَلِ، وَأَعُوذُ بِكَ مِنَ الْبُخْلِ وَالْجُبْنِ، وَأَعُوذُ بِكَ مِنْ غَلَبَةِ الدَّيْنِ وَقَهْرِ الرِّجَالِ.", target: 1 },
+        { text: "اللَّهُمَّ رَبَّ السَّمَاوَاتِ السَّبْعِ وَرَبَّ الْعَرْشِ الْعَظِيمِ، رَبَّنَا وَرَبَّ كُلِّ شَيْءٍ، فَالِقَ الْحَبِّ وَالنَّوَى، وَمُنْزِلَ التَّوْرَاةِ وَالْإِنْجِيلِ وَالْفُرْقَانِ، أَعُوذُ بِكَ مِنْ شَرِّ كُلِّ شَيْءٍ أَنْتَ آخِذٌ بِنَاصِيَتِهِ.", target: 1 },
+        { text: "حَسْبِيَ اللَّهُ لَا إِلَهَ إِلَّا هُوَ، عَلَيْهِ تَوَكَّلْتُ، وَهُوَ رَبُّ الْعَرْشِ الْعَظِيمِ.", target: 7 },
+        { text: "اللَّهُمَّ عَافني في بَدَني، اللَّهُمَّ عَافني في سَمْعي، اللَّهُمَّ عَافني في بَصَري، لا إلهَ إلا أنتَ.", target: 3 },
+        { text: "يَا حَيُّ يَا قَيُّومُ، بِرَحْمَتِكَ أَسْتَغِيثُ، أَصْلِحْ لِي شَأْني كُلَّهُ، وَلاَ تَكِلْنِي إِلَى نَفْسِي طَرْفَةَ عَيْنٍ.", target: 1 },
+        { text: "اللَّهُمَّ إِنِّي أَسْأَلُكَ الْعَفْوَ وَالْعَافِيَةَ فِي الدُّنْيَا وَالْآخِرَةِ.", target: 1 }
       ],
       duas: [
-        { text: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ.", target: 1 }
+        { text: "رَبَّنَا آتِنَا فِي الدُّنْيَا حَسَنَةً وَفِي الْآخِرَةِ حَسَنَةً وَقِنَا عَذَابَ النَّارِ.", target: 1 },
+        { text: "رَبَّنَا لَا تُزِغْ قُلُوبَنَا بَعْدَ إِذْ هَدَيْتَنَا وَهَبْ لَنَا مِنْ لَدُنْكَ رَحْمَةً ۚ إِنَّكَ أَنْتَ الْوَهَّابُ.", target: 1 },
+        { text: "رَبِّ أَوْزِعْنِي أَنْ أَشْكُرَ نِعْمَتكَ الَّتِي أَنْعَمْتَ عَلَيَّ وَعَلَى وَالِدَيَّ وَأَنْ أَعْمَلَ صَالِحًا تَرْضَاهُ وَأَدْخِلْنِي بِرَحْمَتِكَ فِي عِبَادِكَ الصَّالِحِينَ.", target: 1 },
+        { text: "رَبَّنَا هَبْ لَنَا مِنْ أَزْوَاجِنَا وَذُرِّياتِنَا قُرَّةَ أَعْيُنٍ وَاجْعَلْنَا لِلْمُتَّقِينَ إِمَامًا.", target: 1 },
+        { text: "رَبِّ جْعَلْنِي مُقِيمَ الصَّلاَةِ وَمِن ذُرِّيَّتِي رَبَّنَا وَتَقَبَّلْ دُعَاءِ.", target: 1 }
       ],
       morning: [
-        { text: "أَصْبَحْنَا وَأَصْبَحَ المُلْكُ لِلَّهِ، وَالحَمْدُ لِلَّهِ لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ.", target: 1 }
+        { text: "أَصْبَحْنَا وَأَصْبَحَ المُلْكُ لِلَّهِ، وَالحَمْدُ لِلَّهِ لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، لَهُ المُلْكُ وَلَهُ الحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.", target: 1 },
+        { text: "اللَّهُمَّ أَنْتَ رَبِّي لاَ إِلَهَ إِلاَّ أَنْتَ، خَلَقْتَنِي وَأَنَا عَبْدُكَ، وَأَنَا عَلَى عَهْدِكَ وَوَعْدِكَ مَا اسْتَطَعْتُ، أَعُوذُ بِكَ مِنْ شَرِّ مَا صَنَعْتُ، أَبُوءُ لَكَ بِنِعْمَتِكَ عَلَيَّ، وَأَبُوءُ بِذَنْبِي فَاغْفِرْ لِي فَإِنَّهُ لاَ يَغْفِرُ الذُّنُوبَ إِلاَّ أَنْتَ.", target: 1 },
+        { text: "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ، عَدَدَ خَلْقِهِ، وَرِضَا نَفْسِهِ، وَزِنَةَ عَرْشِهِ، وَمِدَادَ كَلِمَاتِهِ.", target: 3 },
+        { text: "بِسْمِ اللَّهِ الَّذِي لاَ يَضُرُّ مَعَ اسْمِهِ شَيْءٌ فِي الأَرْضِ وَلاَ فِي السَّمَاءِ وَهُوَ السَّمِيعُ العَلِيمُ.", target: 3 }
       ],
       evening: [
-        { text: "أَمْسَيْنَا وَأَمْسَى المُلْكُ لِلَّهِ، وَالحَمْدُ لِلَّهِ لاَ إِلَهَ إِلاَّ اللَّهُ.", target: 1 }
+        { text: "أَمْسَيْنَا وَأَمْسَى المُلْكُ لِلَّهِ، وَالحَمْدُ لِلَّهِ لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، لَهُ المُلْكُ وَلَهُ الحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.", target: 1 },
+        { text: "أَعُوذُ بِكَلِمَاتِ اللَّهِ التَّامَّاتِ مِنْ شَرِّ مَا خَلَقَ.", target: 3 },
+        { text: "اللَّهُمَّ بِكَ أَمْسَيْنَا، وَبِكَ أَصْبَحْنَا، وَبِكَ نَحْيَا، وَبِكَ نَمُوتُ، وَإِلَيْكَ المَصِيرُ.", target: 1 }
       ],
       sleep: [
-        { text: "بِاسْمِكَ رَبِّي وَضَعْتُ جَنْبِي، وَبِكَ أَرْفَعُهُ.", target: 1 }
+        { text: "بِاسْمِكَ رَبِّي وَضَعْتُ جَنْبِي، وَبِكَ أَرْفَعُهُ، فَإِنْ أَمْسَكْتَ نَفْسِي فَارْحَمْهَا، وَإِنْ أَرْسَلْتَهَا فَاحْفَظْهَا بِمَا تَحْفَظُ بِهِ عِبَادَكَ الصَّالِحِينَ.", target: 1 },
+        { text: "سُبْحَانَ اللَّهِ (33)، الحَمْدُ لِلَّهِ (33)، اللَّهُ أَكْبَرُ (34)", target: 1 }
       ],
       after_prayer: [
-        { text: "أَسْتَغْفِرُ اللَّهَ (ثَلاَثاً)، اللَّهُمَّ أَنْتَ السَّلاَمُ وَمِنْكَ السَّلاَمُ.", target: 1 }
+        { text: "أَسْتَغْفِرُ اللَّهَ (ثَلاَثاً)، اللَّهُمَّ أَنْتَ السَّلاَمُ وَمِنْكَ السَّلاَمُ، تَبَارَكْتَ يَا ذَا الجَلاَلِ وَالإِكْرَامِ.", target: 1 },
+        { text: "لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ، لَهُ المُلْكُ وَلَهُ الحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ.", target: 1 },
+        { text: "سُبْحَانَ اللَّهِ (33)، الحَمْدُ لِلَّهِ (33)، اللَّهُ أَكْبَرُ (33)، تَمَامَ المِائَةِ: لاَ إِلَهَ إِلاَّ اللَّهُ وَحْدَهُ لاَ شَرِيكَ لَهُ...", target: 1 }
       ]
     };
 
+    
+    // ==========================================
+    // السبحة الإلكترونية الحرة
+    // ==========================================
     let tasbeehCount = 0;
     let tasbeehLaps = parseInt(localStorage.getItem("tasbeeh_laps") || "0");
     let tasbeehTotal = parseInt(localStorage.getItem("tasbeeh_total") || "0");
@@ -1880,13 +2173,29 @@
     function incrementTasbeeh() {
       tasbeehCount++;
       tasbeehTotal++;
-      if (tasbeehCount >= 33) { tasbeehLaps++; tasbeehCount = 0; }
+
+      if (navigator.vibrate) {
+        navigator.vibrate(25); // اهتزاز لمسي تفاعلي
+      }
+
+      if (tasbeehCount >= 33) {
+        tasbeehLaps++;
+        tasbeehCount = 0;
+        if (navigator.vibrate) navigator.vibrate([40, 50, 40]);
+      }
+
+      localStorage.setItem("tasbeeh_laps", tasbeehLaps);
+      localStorage.setItem("tasbeeh_total", tasbeehTotal);
       updateTasbeehUI();
     }
 
     function resetTasbeeh() {
-      tasbeehCount = 0; tasbeehLaps = 0;
-      updateTasbeehUI();
+      if (confirm("هل تريد إعادة ضبط العداد الحالي والدورات؟")) {
+        tasbeehCount = 0;
+        tasbeehLaps = 0;
+        localStorage.setItem("tasbeeh_laps", "0");
+        updateTasbeehUI();
+      }
     }
 
     function updateTasbeehUI() {
@@ -1902,53 +2211,210 @@
       event?.target?.classList.add("active");
       const list = document.getElementById("azkarList");
       list.innerHTML = "";
+
       const items = azkarData[cat] || [];
       items.forEach((item, idx) => {
         const card = document.createElement("div");
         card.className = "zikr-card";
-        card.innerHTML = `<div>${item.text}</div><div class="zikr-footer"><span style="color:var(--text-muted); font-size:0.85rem;">التكرار: ${item.target}</span><button class="zikr-count-btn" onclick="countZikr(this)">${item.target}</button></div>`;
+        card.innerHTML = `
+          <div>${item.text}</div>
+          <div class="zikr-footer">
+            <span style="color:var(--text-muted); font-size:0.85rem;">التكرار المطلوب: ${item.target}</span>
+            <button class="zikr-count-btn" id="cnt-${cat}-${idx}" onclick="countZikr(this, ${item.target})">${item.target}</button>
+          </div>
+        `;
         list.appendChild(card);
       });
     }
 
-    function countZikr(btn) {
+    function countZikr(btn, max) {
       let current = parseInt(btn.innerText);
-      if (current > 1) btn.innerText = current - 1;
-      else { btn.innerText = "✓ اكتمل"; btn.style.background = "#2d6a4f"; btn.disabled = true; }
+      if (current > 1) {
+        btn.innerText = current - 1;
+      } else if (current === 1) {
+        btn.innerText = "✓ اكتمل";
+        btn.style.background = "#2d6a4f";
+        btn.disabled = true;
+      }
     }
 
+    // ==========================================
+    // الدول والمدن مع الإحداثيات لحساب القبلة والمواقيت
+    // ==========================================
     const locations = [
-      { country: "مصر", enCountry: "Egypt", method: 5, cities: [{ ar: "القاهرة", en: "Cairo" }] },
-      { country: "السعودية", enCountry: "Saudi Arabia", method: 4, cities: [{ ar: "مكة المكرمة", en: "Makkah" }] }
+      { country: "مصر", enCountry: "Egypt", method: 5, cities: [
+          { ar: "القاهرة", en: "Cairo", lat: 30.0444, lon: 31.2357 },
+          { ar: "الإسكندرية", en: "Alexandria", lat: 31.2001, lon: 29.9187 },
+          { ar: "الجيزة", en: "Giza", lat: 30.0131, lon: 31.2089 },
+          { ar: "المنصورة", en: "Mansoura", lat: 31.0409, lon: 31.3785 },
+          { ar: "أسيوط", en: "Asyut", lat: 27.1783, lon: 31.1859 },
+          { ar: "طنطا", en: "Tanta", lat: 30.7865, lon: 31.0004 },
+          { ar: "أسوان", en: "Aswan", lat: 24.0889, lon: 32.8998 },
+          { ar: "بورسعيد", en: "Port Said", lat: 31.2653, lon: 32.3019 }
+        ]
+      },
+      { country: "السعودية", enCountry: "Saudi Arabia", method: 4, cities: [
+          { ar: "مكة المكرمة", en: "Makkah", lat: 21.3891, lon: 39.8579 },
+          { ar: "المدينة المنورة", en: "Madinah", lat: 24.5247, lon: 39.5692 },
+          { ar: "الرياض", en: "Riyadh", lat: 24.7136, lon: 46.6753 },
+          { ar: "جدة", en: "Jeddah", lat: 21.5433, lon: 39.1728 },
+          { ar: "الدمام", en: "Dammam", lat: 26.4207, lon: 50.0888 },
+          { ar: "أبها", en: "Abha", lat: 18.2164, lon: 42.5053 },
+          { ar: "تبوك", en: "Tabuk", lat: 28.3835, lon: 36.5662 }
+        ]
+      },
+      { country: "الإمارات", enCountry: "United Arab Emirates", method: 4, cities: [
+          { ar: "أبوظبي", en: "Abu Dhabi", lat: 24.4539, lon: 54.3773 },
+          { ar: "دبي", en: "Dubai", lat: 25.2048, lon: 55.2708 },
+          { ar: "الشارقة", en: "Sharjah", lat: 25.3463, lon: 55.4209 },
+          { ar: "عجمان", en: "Ajman", lat: 25.4052, lon: 55.5136 }
+        ]
+      },
+      { country: "الكويت", enCountry: "Kuwait", method: 4, cities: [
+          { ar: "مدينة الكويت", en: "Kuwait City", lat: 29.3759, lon: 47.9774 },
+          { ar: "حولي", en: "Hawalli", lat: 29.3328, lon: 48.0282 },
+          { ar: "الأحمدي", en: "Al Ahmadi", lat: 29.0769, lon: 48.0839 }
+        ]
+      },
+      { country: "قطر", enCountry: "Qatar", method: 4, cities: [
+          { ar: "الدوحة", en: "Doha", lat: 25.2854, lon: 51.5310 },
+          { ar: "الريان", en: "Al Rayyan", lat: 25.2919, lon: 51.4244 }
+        ]
+      },
+      { country: "عمان", enCountry: "Oman", method: 4, cities: [
+          { ar: "مسقط", en: "Muscat", lat: 23.5880, lon: 58.3829 },
+          { ar: "صلالة", en: "Salalah", lat: 17.0151, lon: 54.0924 }
+        ]
+      },
+      { country: "الأردن", enCountry: "Jordan", method: 4, cities: [
+          { ar: "عمان", en: "Amman", lat: 31.9454, lon: 35.9284 },
+          { ar: "إربد", en: "Irbid", lat: 32.5568, lon: 35.8469 },
+          { ar: "الزرقاء", en: "Zarqa", lat: 32.0728, lon: 36.0880 }
+        ]
+      },
+      { country: "فلسطين", enCountry: "Palestine", method: 4, cities: [
+          { ar: "القدس الشريف", en: "Jerusalem", lat: 31.7683, lon: 35.2137 },
+          { ar: "غزة", en: "Gaza", lat: 31.5017, lon: 34.4668 },
+          { ar: "رام الله", en: "Ramallah", lat: 31.9038, lon: 35.2034 },
+          { ar: "نابلس", en: "Nablus", lat: 32.2211, lon: 35.2544 },
+          { ar: "الخليل", en: "Hebron", lat: 31.5326, lon: 35.0998 }
+        ]
+      },
+      { country: "المغرب", enCountry: "Morocco", method: 3, cities: [
+          { ar: "الرباط", en: "Rabat", lat: 34.0209, lon: -6.8416 },
+          { ar: "الدار البيضاء", en: "Casablanca", lat: 33.5731, lon: -7.5898 },
+          { ar: "مراكش", en: "Marrakech", lat: 31.6295, lon: -7.9811 },
+          { ar: "فاس", en: "Fes", lat: 34.0181, lon: -5.0078 },
+          { ar: "طنجة", en: "Tangier", lat: 35.7595, lon: -5.8340 }
+        ]
+      },
+      { country: "الجزائر", enCountry: "Algeria", method: 3, cities: [
+          { ar: "الجزائر العاصمة", en: "Algiers", lat: 36.7538, lon: 3.0588 },
+          { ar: "وهران", en: "Oran", lat: 35.6987, lon: -0.6349 },
+          { ar: "قسنطينة", en: "Constantine", lat: 36.3650, lon: 6.6147 }
+        ]
+      },
+      { country: "تونس", enCountry: "Tunisia", method: 3, cities: [
+          { ar: "تونس العاصمة", en: "Tunis", lat: 36.8065, lon: 10.1815 },
+          { ar: "صفاقس", en: "Sfax", lat: 34.7406, lon: 10.7603 },
+          { ar: "سوسة", en: "Sousse", lat: 35.8256, lon: 10.6084 }
+        ]
+      },
+      { country: "العراق", enCountry: "Iraq", method: 4, cities: [
+          { ar: "بغداد", en: "Baghdad", lat: 33.3152, lon: 44.3661 },
+          { ar: "البصرة", en: "Basra", lat: 30.5081, lon: 47.7835 },
+          { ar: "أربيل", en: "Erbil", lat: 36.1901, lon: 44.0091 },
+          { ar: "الموصل", en: "Mosul", lat: 36.3400, lon: 43.1300 }
+        ]
+      },
+      { country: "سوريا", enCountry: "Syria", method: 4, cities: [
+          { ar: "دمشق", en: "Damascus", lat: 33.5138, lon: 36.2765 },
+          { ar: "حلب", en: "Aleppo", lat: 36.2021, lon: 37.1343 },
+          { ar: "حمص", en: "Homs", lat: 34.7324, lon: 36.7137 }
+        ]
+      },
+      { country: "اليمن", enCountry: "Yemen", method: 4, cities: [
+          { ar: "صنعاء", en: "Sanaa", lat: 15.3694, lon: 44.1910 },
+          { ar: "عدن", en: "Aden", lat: 12.7855, lon: 45.0187 },
+          { ar: "تعز", en: "Taiz", lat: 13.5795, lon: 44.0209 }
+        ]
+      },
+      { country: "السودان", enCountry: "Sudan", method: 5, cities: [
+          { ar: "الخرطوم", en: "Khartoum", lat: 15.5007, lon: 32.5599 },
+          { ar: "أم درمان", en: "Omdurman", lat: 15.6500, lon: 32.4800 },
+          { ar: "بورتسودان", en: "Port Sudan", lat: 19.6175, lon: 37.2164 }
+        ]
+      },
+      { country: "ليبيا", enCountry: "Libya", method: 3, cities: [
+          { ar: "طرابلس", en: "Tripoli", lat: 32.8872, lon: 13.1913 },
+          { ar: "بنغازي", en: "Benghazi", lat: 32.1166, lon: 20.0686 },
+          { ar: "مصراتة", en: "Misrata", lat: 32.3754, lon: 15.0925 }
+        ]
+      },
+      { country: "تركيا", enCountry: "Turkey", method: 13, cities: [
+          { ar: "إسطنبول", en: "Istanbul", lat: 41.0082, lon: 28.9784 },
+          { ar: "أنقرة", en: "Ankara", lat: 39.9334, lon: 32.8597 }
+        ]
+      }
     ];
 
+    const countrySelect = document.getElementById("countrySelect");
+    const citySelect = document.getElementById("citySelect");
+
     function initLocationSelector() {
-      const countrySelect = document.getElementById("countrySelect");
+      countrySelect.innerHTML = "";
       locations.forEach((loc, idx) => {
         const opt = document.createElement("option");
-        opt.value = idx; opt.textContent = loc.country;
+        opt.value = idx;
+        opt.textContent = loc.country;
         countrySelect.appendChild(opt);
       });
-      updateCities(0, true);
+
+      const savedCountryIdx = localStorage.getItem("selected_country_idx") || 0;
+      countrySelect.value = savedCountryIdx;
+      updateCities(savedCountryIdx, true);
     }
 
-    function updateCities(countryIdx) {
-      const citySelect = document.getElementById("citySelect");
+    function updateCities(countryIdx, loadSavedCity = false) {
+      const loc = locations[countryIdx];
       citySelect.innerHTML = "";
-      locations[countryIdx].cities.forEach((city, idx) => {
+      loc.cities.forEach((city, idx) => {
         const opt = document.createElement("option");
-        opt.value = idx; opt.textContent = city.ar;
+        opt.value = idx;
+        opt.textContent = city.ar;
         citySelect.appendChild(opt);
       });
+
+      if (loadSavedCity) {
+        const savedCityIdx = localStorage.getItem("selected_city_idx") || 0;
+        citySelect.value = savedCityIdx;
+      } else {
+        citySelect.value = 0;
+      }
+
       saveAndFetchPrayers();
     }
 
-    function onCountryChange() { updateCities(document.getElementById("countrySelect").value); }
-    function onCityChange() { saveAndFetchPrayers(); }
+    function onCountryChange() {
+      localStorage.setItem("selected_country_idx", countrySelect.value);
+      localStorage.setItem("selected_city_idx", 0);
+      updateCities(countrySelect.value, false);
+    }
+
+    function onCityChange() {
+      localStorage.setItem("selected_city_idx", citySelect.value);
+      saveAndFetchPrayers();
+      
+    }
 
     async function saveAndFetchPrayers() {
+      const countryIdx = countrySelect.value;
+      const cityIdx = citySelect.value;
+      const loc = locations[countryIdx];
+      const city = loc.cities[cityIdx];
+
       try {
-        const res = await fetch(`https://api.aladhan.com/v1/timingsByCity?city=Cairo&country=Egypt&method=5`);
+        const res = await fetch(`https://api.aladhan.com/v1/timingsByCity?city=${city.en}&country=${loc.enCountry}&method=${loc.method}`);
         const data = await res.json();
         if (data.data?.timings) {
           const t = data.data.timings;
@@ -1962,14 +2428,134 @@
       } catch(e) {}
     }
 
+        // ==========================================
+    // الوضع الليلي
+    // ==========================================
     themeBtn.addEventListener("click", () => {
       document.body.classList.toggle("dark-mode");
-      themeBtn.innerText = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+      const isDark = document.body.classList.contains("dark-mode");
+      themeBtn.innerText = isDark ? "☀️" : "🌙";
+      localStorage.setItem("theme_mode", isDark ? "dark" : "light");
     });
 
+    if (localStorage.getItem("theme_mode") === "dark") {
+      document.body.classList.add("dark-mode");
+      themeBtn.innerText = "☀️";
+    }
+
+    window.onclick = function(event) {
+      if (event.target === readerModal) closeModal();
+      if (event.target === document.getElementById("storyPreviewModal")) closeStoryModal();
+    };
+
+    reciterSelect.addEventListener("change", renderSurahs);
+    searchInput.addEventListener("input", renderSurahs);
+
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log('Service Worker registered'))
+        .catch((err) => console.log('Service Worker failed', err));
+    }
+
+
+    // ==========================================
+    // إرسال الاقتراحات والمشاكل مباشرة
+    // ==========================================
+    // ضع رقمك على واتساب هنا مع كود الدولة بدون علامة + (مثال: 201000000000)
+    const MY_WHATSAPP_NUMBER = "201122127606"; 
+    // ضع بريدك الإلكتروني هنا لتلقي الرسائل
+    const MY_EMAIL_ADDRESS = "mahmoudhelal310@gmail.com";
+
+    function getFormattedFeedback() {
+      const type = document.getElementById("msgType").value;
+      const name = document.getElementById("senderName").value.trim();
+      const contact = document.getElementById("senderContact").value.trim() || "لم يذكر";
+      const body = document.getElementById("msgBody").value.trim();
+
+      const text = `السلام عليكم ورحمة الله وبركاته،\nرسالة جديدة من زائر بوابة القرآن الكريم:\n\n📌 النوع: ${type}\n👤 الاسم: ${name}\n📞 وسيلة التواصل: ${contact}\n\n📝 الرسالة:\n${body}`;
+      return { text, type, name, body };
+    }
+
+    function handleFeedbackSubmit(e) {
+      e.preventDefault();
+      const { text } = getFormattedFeedback();
+      const whatsappUrl = `https://wa.me/${MY_WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`;
+      window.open(whatsappUrl, '_blank');
+    }
+
+    function sendViaEmail() {
+      const name = document.getElementById("senderName").value.trim();
+      const body = document.getElementById("msgBody").value.trim();
+      if (!name || !body) {
+        alert("يرجى ملء الاسم وتفاصيل الرسالة أولاً.");
+        return;
+      }
+      const { text, type } = getFormattedFeedback();
+      const subject = encodeURIComponent(`[بوابة القرآن] ${type} من ${name}`);
+      const mailtoUrl = `mailto:${MY_EMAIL_ADDRESS}?subject=${subject}&body=${encodeURIComponent(text)}`;
+      window.location.href = mailtoUrl;
+    }
+
+
+    // ==========================================
+    // تذكير بالصلاة على النبي ﷺ والأذكار كل 15 دقيقة
+    // ==========================================
+    const dhikrRemindersList = [
+      "اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ ﷺ",
+      "سُبْحَانَ اللَّهِ وَبِحَمْدِهِ ، سُبْحَانَ اللَّهِ الْعَظِيمِ",
+      "لاَ حَوْلَ وَلاَ قُوَّةَ إِلاَّ بِاللَّهِ الْعَلِيِّ الْعَظِيمِ",
+      "أَسْتَغْفِرُ اللَّهَ الْعَظِيمَ وَأَتُوبُ إِلَيْهِ",
+      "لاَ إِلَهَ إِلاَّ أَنْتَ سُبْحَانَكَ إِنِّي كُنْتُ مِنَ الظَّالِمِينَ",
+      "اللَّهُمَّ إِنَّكَ عَفُوٌّ تُحِبُّ الْعَفْوَ فَاعْفُ عَنَّا"
+    ];
+
+    let toastTimer = null;
+
+    function triggerDhikrReminder() {
+      const toast = document.getElementById("dhikrToast");
+      const textEl = document.getElementById("dhikrToastText");
+      if (!toast || !textEl) return;
+
+      const randomDhikr = dhikrRemindersList[Math.floor(Math.random() * dhikrRemindersList.length)];
+      textEl.innerText = randomDhikr;
+      toast.style.display = "flex";
+
+      // إخفاء تلقائي بعد 9 ثوانٍ
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        dismissDhikrToast();
+      }, 9000);
+    }
+
+    function dismissDhikrToast() {
+      const toast = document.getElementById("dhikrToast");
+      if (toast) toast.style.display = "none";
+    }
+
+    // تشغيل أول تذكير بعد 3 دقائق، ثم كل 15 دقيقة
+    setTimeout(() => {
+      triggerDhikrReminder();
+      setInterval(triggerDhikrReminder, 15 * 60 * 1000);
+    }, 3 * 60 * 1000);
+
+    // التشغيل الأولي
     renderSurahs();
     checkBookmark();
     initLocationSelector();
   </script>
+
+  <!-- مشغل صوت الآية المنفصلة غير المرئي -->
+  
+
+  <!-- إشعار التذكير العائم بالصلاة على النبي ﷺ والأذكار -->
+  <div class="dhikr-toast" id="dhikrToast">
+    <span style="font-size:1.6rem;">🌿</span>
+    <div style="flex:1; text-align:right;">
+      <div style="font-size:0.75rem; color:var(--accent); font-weight:bold;">تذكير طيب</div>
+      <div id="dhikrToastText" style="font-size:0.92rem; font-weight:700; color:var(--text); line-height:1.4;">اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ ﷺ</div>
+    </div>
+    <button onclick="dismissDhikrToast()" style="background:none; border:none; font-size:1.1rem; cursor:pointer; color:var(--text-muted);">&times;</button>
+  </div>
+
 </body>
 </html>
