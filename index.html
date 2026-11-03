@@ -43,6 +43,7 @@
       margin: 0;
       padding: 0;
       font-family: 'Cairo', -apple-system, BlinkMacSystemFont, sans-serif;
+      transition: background-color 0.25s, color 0.25s, border-color 0.25s;
     }
 
     body {
@@ -55,7 +56,7 @@
     header {
       background: var(--header-gradient);
       color: #fff;
-      padding: 14px 12px 10px;
+      padding: 18px 16px 14px;
       box-shadow: 0 4px 14px rgba(0,0,0,0.12);
     }
 
@@ -64,15 +65,15 @@
       justify-content: space-between;
       align-items: center;
       max-width: 950px;
-      margin: 0 auto 6px;
+      margin: 0 auto 8px;
     }
 
     .header-top h1 {
-      font-size: 1.3rem;
+      font-size: 1.45rem;
       font-weight: 800;
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
 
     .top-actions {
@@ -81,19 +82,18 @@
       gap: 6px;
     }
 
-    /* تصغير الأيقونات بحيث لا تأخذ مساحة كبيرة */
     .icon-btn {
       background: rgba(255,255,255,0.15);
       border: 1px solid rgba(255,255,255,0.25);
       color: #fff;
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 0.95rem;
+      font-size: 1rem;
       outline: none;
     }
 
@@ -103,7 +103,7 @@
 
     .location-bar {
       max-width: 950px;
-      margin: 0 auto 6px;
+      margin: 0 auto 8px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -111,23 +111,23 @@
 
     .loc-selector {
       background: rgba(0,0,0,0.2);
-      border-radius: 16px;
-      padding: 4px 10px;
+      border-radius: 18px;
+      padding: 4px 12px;
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       color: #e2e8f0;
       flex-wrap: wrap;
     }
 
     .loc-selector select {
-      background: rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.15);
       color: #fff;
-      border: 1px solid rgba(255,255,255,0.4);
+      border: 1px solid rgba(255,255,255,0.3);
       padding: 3px 8px;
       border-radius: 6px;
-      font-size: 0.78rem;
+      font-size: 0.8rem;
       outline: none;
       cursor: pointer;
     }
@@ -145,26 +145,26 @@
       max-width: 950px;
       margin: 0 auto;
       background: rgba(0,0,0,0.22);
-      border-radius: 10px;
-      padding: 6px 10px;
+      border-radius: 12px;
+      padding: 8px 12px;
       display: flex;
       flex-wrap: wrap;
       justify-content: space-around;
       align-items: center;
-      gap: 6px;
-      font-size: 0.78rem;
+      gap: 8px;
+      font-size: 0.82rem;
     }
 
     .prayer-item {
       display: flex;
       flex-direction: column;
       align-items: center;
-      gap: 1px;
+      gap: 2px;
     }
 
     .prayer-item span:first-child {
       color: #cbd5e1;
-      font-size: 0.7rem;
+      font-size: 0.73rem;
     }
 
     .prayer-item span:last-child {
@@ -173,121 +173,141 @@
     }
 
     .ayah-banner {
-      margin: 10px auto 0;
+      margin: 12px auto 0;
       max-width: 950px;
-      padding: 8px 12px;
+      padding: 9px 14px;
       text-align: center;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
       background: var(--accent-soft);
       color: var(--primary);
-      border-radius: 8px;
+      border-radius: 10px;
       font-weight: 700;
       font-family: 'Amiri', serif;
     }
-    body.dark-mode .ayah-banner {
-      color: var(--accent);
-    }
+    body.dark-mode .ayah-banner { color: var(--accent); }
 
     .container {
       max-width: 950px;
       margin: 0 auto;
-      padding: 14px 12px;
+      padding: 18px 15px;
     }
 
     .nav-tabs {
       display: flex;
-      gap: 8px;
-      margin-bottom: 16px;
+      gap: 10px;
+      margin-bottom: 20px;
       overflow-x: auto;
-      padding-bottom: 4px;
+      padding-bottom: 6px;
+      scrollbar-width: none;
     }
+    .nav-tabs::-webkit-scrollbar { display: none; }
 
     .tab-btn {
       flex: 1 1 0;
-      min-width: 120px;
-      padding: 10px 12px;
+      min-width: 140px;
+      padding: 12px 14px;
       border: 1px solid var(--border);
       background: var(--card-bg);
       color: var(--text-muted);
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       font-weight: 700;
-      border-radius: 12px;
+      border-radius: 14px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       gap: 6px;
       white-space: nowrap;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.03);
+    }
+
+    .tab-btn:hover {
+      border-color: var(--primary-light);
+      color: var(--primary);
     }
 
     .tab-btn.active {
       background: var(--primary);
       color: #fff;
       border-color: var(--primary);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    .bookmark-bar {
+      display: none;
+      background: var(--accent-soft);
+      border: 1px dashed var(--accent);
+      border-radius: 12px;
+      padding: 10px 16px;
+      margin-bottom: 18px;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      font-weight: 600;
     }
 
     .controls-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-bottom: 12px;
+      gap: 12px;
+      margin-bottom: 14px;
     }
 
     @media (max-width: 600px) {
-      .controls-grid {
-        grid-template-columns: 1fr;
-      }
+      .controls-grid { grid-template-columns: 1fr; }
     }
 
     .select-box select,
     .search-box input {
       width: 100%;
-      padding: 10px 14px;
+      padding: 12px 16px;
       border: 1px solid var(--border);
-      border-radius: 10px;
-      font-size: 0.88rem;
+      border-radius: 12px;
+      font-size: 0.92rem;
       outline: none;
       background-color: var(--card-bg);
       color: var(--text);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.03);
     }
 
     .reciter-toolbar {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 14px;
+      margin-bottom: 18px;
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 8px 14px;
-      font-size: 0.85rem;
+      border-radius: 12px;
+      padding: 10px 16px;
+      font-size: 0.9rem;
     }
 
     .surah-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 10px;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
     }
 
     .surah-card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 10px 12px;
+      border-radius: 14px;
+      padding: 12px 14px;
       display: flex;
       align-items: center;
       justify-content: space-between;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.02);
     }
 
     .surah-info {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 10px;
     }
 
     .surah-num {
-      width: 32px;
-      height: 32px;
+      width: 36px;
+      height: 36px;
       background: var(--accent-soft);
       color: var(--primary);
       border-radius: 50%;
@@ -295,20 +315,20 @@
       align-items: center;
       justify-content: center;
       font-weight: 700;
-      font-size: 0.8rem;
+      font-size: 0.85rem;
     }
     body.dark-mode .surah-num { color: var(--accent); }
 
-    .surah-name { font-weight: 700; font-size: 0.95rem; }
-    .surah-actions { display: flex; gap: 5px; }
+    .surah-name { font-weight: 700; font-size: 1rem; }
+    .surah-actions { display: flex; gap: 6px; }
 
     .btn {
       border: none;
       background: none;
       cursor: pointer;
-      padding: 6px 10px;
-      border-radius: 6px;
-      font-size: 0.78rem;
+      padding: 7px 11px;
+      border-radius: 8px;
+      font-size: 0.82rem;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -323,63 +343,64 @@
 
     .radio-section { display: none; flex-direction: column; align-items: center; }
     .radio-card {
-      width: 100%; max-width: 420px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 18px; padding: 24px 18px; text-align: center; box-shadow: 0 6px 20px rgba(0,0,0,0.05);
+      width: 100%; max-width: 440px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 30px 22px; text-align: center; box-shadow: 0 6px 20px rgba(0,0,0,0.05);
     }
-    .creator-tag { font-size: 0.85rem; color: var(--accent); font-weight: bold; margin-bottom: 10px; }
-    .radio-avatar { font-size: 48px; margin-bottom: 10px; }
-    .radio-toggle-btn { width: 100%; padding: 14px; font-size: 1.05rem; font-weight: 700; border: none; border-radius: 12px; background: #1abc9c; color: #000; cursor: pointer; }
+    .creator-tag { font-size: 0.9rem; color: var(--accent); font-weight: bold; margin-bottom: 12px; }
+    .radio-avatar { font-size: 56px; margin-bottom: 12px; }
+    .radio-toggle-btn { width: 100%; padding: 16px; font-size: 1.15rem; font-weight: 700; border: none; border-radius: 14px; background: #1abc9c; color: #000; cursor: pointer; }
 
     .charity-banner {
-      margin: 16px auto 0; padding: 10px; max-width: 420px; border: 1px solid #c8e6c9; background: rgba(241, 248, 233, 0.7); border-radius: 8px; text-align: center; font-size: 0.85rem; color: #2e7d32; font-weight: 700;
+      margin: 22px auto 0; padding: 12px; max-width: 440px; border: 1px solid #c8e6c9; background: rgba(241, 248, 233, 0.7); border-radius: 10px; text-align: center; font-size: 0.92rem; color: #2e7d32; font-weight: 700;
     }
     body.dark-mode .charity-banner { background: rgba(45, 106, 79, 0.2); color: #80ed99; }
 
-    .contact-card { width: 100%; max-width: 500px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 22px 18px; text-align: center; }
+    .contact-card { width: 100%; max-width: 520px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 18px; padding: 26px 20px; text-align: center; box-shadow: 0 4px 18px rgba(0,0,0,0.04); }
 
-    .azkar-container { display: none; flex-direction: column; gap: 12px; }
-    .azkar-filter { display: flex; gap: 6px; margin-bottom: 6px; overflow-x: auto; padding-bottom: 4px; }
-    .filter-chip { padding: 6px 14px; border-radius: 16px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text-muted); font-size: 0.8rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
-    .filter-chip.active { background: var(--primary); color: #fff; }
+    .azkar-container { display: none; flex-direction: column; gap: 14px; }
+    .azkar-filter { display: flex; gap: 8px; margin-bottom: 8px; overflow-x: auto; padding-bottom: 4px; }
+    .filter-chip { padding: 8px 16px; border-radius: 20px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text-muted); font-size: 0.85rem; font-weight: 600; cursor: pointer; white-space: nowrap; }
+    .filter-chip.active { background: var(--primary); color: #fff; border-color: var(--primary); }
 
-    .zikr-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 14px 16px; display: flex; flex-direction: column; gap: 10px; font-family: 'Amiri', serif; font-size: 1rem; }
-    .zikr-footer { display: flex; justify-content: space-between; align-items: center; font-family: 'Cairo', sans-serif; border-top: 1px solid var(--border); padding-top: 8px; }
-    .zikr-count-btn { background: var(--primary); color: #fff; padding: 5px 14px; border-radius: 16px; border: none; font-weight: 700; cursor: pointer; font-size: 0.85rem; }
+    .zikr-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; display: flex; flex-direction: column; gap: 12px; font-family: 'Amiri', serif; font-size: 1.05rem; }
+    .zikr-footer { display: flex; justify-content: space-between; align-items: center; font-family: 'Cairo', sans-serif; border-top: 1px solid var(--border); padding-top: 10px; }
+    .zikr-count-btn { background: var(--primary); color: #fff; padding: 6px 18px; border-radius: 20px; border: none; font-weight: 700; cursor: pointer; }
 
     .player-bar {
-      position: fixed; bottom: 0; left: 0; right: 0; background: var(--card-bg); border-top: 1px solid var(--border); padding: 8px 14px; display: flex; flex-direction: column; align-items: center; gap: 6px; z-index: 1000;
+      position: fixed; bottom: 0; left: 0; right: 0; background: var(--card-bg); border-top: 1px solid var(--border); box-shadow: 0 -4px 18px rgba(0,0,0,0.12); padding: 10px 16px; display: flex; flex-direction: column; align-items: center; gap: 8px; z-index: 1000;
     }
-    .player-details { display: flex; align-items: center; gap: 6px; font-weight: 700; color: var(--primary); font-size: 0.85rem; }
+    .player-details { display: flex; align-items: center; gap: 8px; font-weight: 700; color: var(--primary); font-size: 0.92rem; }
     body.dark-mode .player-details { color: var(--accent); }
-    .player-controls-row { display: flex; align-items: center; gap: 10px; width: 100%; max-width: 600px; }
-    .p-btn { background: none; border: none; font-size: 1.1rem; cursor: pointer; color: var(--text); }
-    audio { flex: 1; height: 34px; }
+    .player-controls-row { display: flex; align-items: center; gap: 12px; width: 100%; max-width: 650px; }
+    .p-btn { background: none; border: none; font-size: 1.25rem; cursor: pointer; color: var(--text); }
+    audio { flex: 1; height: 38px; }
 
-    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.65); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 12px; }
-    .modal-content { background: var(--modal-bg); width: 100%; max-width: 800px; max-height: 90vh; border-radius: 14px; display: flex; flex-direction: column; overflow: hidden; }
-    .modal-header { padding: 10px 16px; background: var(--primary); color: #fff; display: flex; justify-content: space-between; align-items: center; }
-    .modal-actions { display: flex; align-items: center; gap: 6px; }
-    .font-ctrl-btn { background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3); color: #fff; border-radius: 6px; padding: 3px 8px; cursor: pointer; font-size: 0.8rem; font-weight: 700; }
-    .modal-body { padding: 18px; overflow-y: auto; line-height: 2.2; font-size: 1.3rem; font-family: 'Amiri', serif; text-align: justify; flex-grow: 1; }
-    .bismillah { text-align: center; font-weight: 700; font-size: 1.5rem; margin-bottom: 16px; color: var(--accent); }
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.65); display: none; align-items: center; justify-content: center; z-index: 2000; padding: 15px; }
+    .modal-content { background: var(--modal-bg); width: 100%; max-width: 820px; max-height: 90vh; border-radius: 16px; display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 10px 32px rgba(0,0,0,0.3); }
+    .modal-header { padding: 12px 18px; background: var(--primary); color: #fff; display: flex; justify-content: space-between; align-items: center; }
+    .modal-actions { display: flex; align-items: center; gap: 8px; }
+    .font-ctrl-btn { background: rgba(255,255,255,0.18); border: 1px solid rgba(255,255,255,0.3); color: #fff; border-radius: 6px; padding: 4px 10px; cursor: pointer; font-weight: 700; }
+    .modal-body { padding: 22px; overflow-y: auto; line-height: 2.3; font-size: 1.4rem; font-family: 'Amiri', serif; text-align: justify; flex-grow: 1; }
+    .bismillah { text-align: center; font-weight: 700; font-size: 1.6rem; margin-bottom: 20px; color: var(--accent); }
     .ayah-text { cursor: pointer; padding: 2px 4px; border-radius: 4px; }
-    .ayah-badge { display: inline-flex; align-items: center; justify-content: center; width: 28px; height: 28px; border: 1.5px solid var(--accent); border-radius: 50%; font-size: 0.8rem; margin: 0 4px; color: var(--primary); font-weight: 700; background: rgba(212, 175, 55, 0.08); cursor: pointer; }
+    .ayah-badge { display: inline-flex; align-items: center; justify-content: center; width: 32px; height: 32px; border: 1.5px solid var(--accent); border-radius: 50%; font-size: 0.85rem; margin: 0 6px; color: var(--primary); font-weight: 700; background: rgba(212, 175, 55, 0.08); cursor: pointer; }
     body.dark-mode .ayah-badge { color: var(--accent); }
 
-    .tafsir-box { border-top: 3px solid var(--accent); background: var(--modal-bg); padding: 14px 18px; font-family: 'Cairo', sans-serif; font-size: 0.95rem; line-height: 1.7; max-height: 35vh; overflow-y: auto; display: none; }
+    .tafsir-box { border-top: 3px solid var(--accent); background: var(--modal-bg); padding: 16px 20px; font-family: 'Cairo', sans-serif; font-size: 1rem; line-height: 1.8; max-height: 38vh; overflow-y: auto; display: none; box-shadow: 0 -8px 24px rgba(0,0,0,0.18); }
     .tafsir-title { font-weight: 700; color: var(--primary); margin-bottom: 6px; display: flex; justify-content: space-between; align-items: center; }
     body.dark-mode .tafsir-title { color: var(--accent); }
-    .tafsir-tool-btn { background: var(--accent-soft); border: 1px solid var(--accent); color: var(--primary); padding: 3px 8px; border-radius: 6px; cursor: pointer; font-size: 0.75rem; font-weight: bold; }
+    .tafsir-tools { display: flex; gap: 8px; }
+    .tafsir-tool-btn { background: var(--accent-soft); border: 1px solid var(--accent); color: var(--primary); padding: 4px 10px; border-radius: 6px; cursor: pointer; font-size: 0.8rem; font-weight: bold; }
     body.dark-mode .tafsir-tool-btn { color: var(--accent); }
 
-    .ayah-audio-btn { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: var(--accent-soft); color: var(--primary); cursor: pointer; font-size: 0.7rem; margin: 0 3px; vertical-align: middle; }
+    .ayah-audio-btn { display: inline-flex; align-items: center; justify-content: center; width: 26px; height: 26px; border-radius: 50%; background: var(--accent-soft); color: var(--primary); cursor: pointer; font-size: 0.75rem; margin: 0 4px; vertical-align: middle; }
     body.dark-mode .ayah-audio-btn { color: var(--accent); }
 
-    .tasbeeh-box { display: none; background: var(--card-bg); border: 1px solid var(--border); border-radius: 18px; padding: 24px 18px; text-align: center; width: 100%; max-width: 420px; margin: 0 auto; }
-    .tasbeeh-ring { width: 150px; height: 150px; border-radius: 50%; border: 7px solid var(--accent); margin: 16px auto; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; user-select: none; background: radial-gradient(circle, var(--card-bg), var(--accent-soft)); }
-    .tasbeeh-counter-num { font-size: 2.8rem; font-weight: 800; color: var(--primary); line-height: 1; }
+    .tasbeeh-box { display: none; background: var(--card-bg); border: 1px solid var(--border); border-radius: 20px; padding: 30px 20px; text-align: center; box-shadow: 0 4px 18px rgba(0,0,0,0.04); width: 100%; max-width: 440px; margin: 0 auto; }
+    .tasbeeh-ring { width: 160px; height: 160px; border-radius: 50%; border: 8px solid var(--accent); margin: 20px auto; display: flex; flex-direction: column; align-items: center; justify-content: center; cursor: pointer; user-select: none; background: radial-gradient(circle, var(--card-bg), var(--accent-soft)); }
+    .tasbeeh-counter-num { font-size: 3rem; font-weight: 800; color: var(--primary); line-height: 1; }
     body.dark-mode .tasbeeh-counter-num { color: var(--accent); }
 
-    .dhikr-toast { position: fixed; bottom: 75px; left: 16px; background: var(--card-bg); border: 1.5px solid var(--accent); border-radius: 12px; padding: 10px 14px; display: none; align-items: center; gap: 10px; z-index: 2500; max-width: 320px; font-size: 0.88rem; }
+    .dhikr-toast { position: fixed; bottom: 85px; left: 20px; background: var(--card-bg); border: 1.5px solid var(--accent); border-radius: 14px; padding: 12px 18px; display: none; align-items: center; gap: 12px; z-index: 2500; max-width: 340px; box-shadow: 0 8px 24px rgba(0,0,0,0.18); }
   </style>
 </head>
 <body>
@@ -387,11 +408,11 @@
   <header>
     <div class="header-top">
       <div>
-        <h1>📖 بوابة القرآن</h1>
-        <div style="font-size: 0.75rem; color: var(--accent); font-weight: 700; margin-top: 2px;">by Mahmoud Helal</div>
+        <h1>📖 بوابة القرآن الكريم الشاملة</h1>
+        <div style="font-size: 0.82rem; color: var(--accent); font-weight: 700; margin-top: 3px;">by Mahmoud Helal</div>
       </div>
       <div class="top-actions">
-        <button class="icon-btn" id="themeBtn" title="الوضع الليلي">🌙</button>
+        <button class="icon-btn" id="themeBtn" title="الوضع الليلي / النهار">🌙</button>
       </div>
     </div>
     <div class="location-bar">
@@ -413,12 +434,13 @@
   </header>
 
   <div class="container">
+    <!-- أسماء الأقسام الأصلية كاملة -->
     <div class="nav-tabs">
-      <button class="tab-btn active" id="tabRadio" onclick="switchTab('radio')">📻 الإذاعة</button>
-      <button class="tab-btn" id="tabQuran" onclick="switchTab('quran')">📜 المصحف</button>
-      <button class="tab-btn" id="tabSearch" onclick="switchTab('search')">🔍 البحث</button>
-      <button class="tab-btn" id="tabAzkar" onclick="switchTab('azkar')">📿 الأذكار</button>
-      <button class="tab-btn" id="tabContact" onclick="switchTab('contact')">📩 التواصل</button>
+      <button class="tab-btn active" id="tabRadio" onclick="switchTab('radio')">📻 إذاعة القرآن الكريم</button>
+      <button class="tab-btn" id="tabQuran" onclick="switchTab('quran')">📜 سور القرآن الكريم</button>
+      <button class="tab-btn" id="tabSearch" onclick="switchTab('search')">🔍 البحث في الآيات</button>
+      <button class="tab-btn" id="tabAzkar" onclick="switchTab('azkar')">📿 حصن المسلم والأذكار</button>
+      <button class="tab-btn" id="tabContact" onclick="switchTab('contact')">📩 تواصل واقتراحات</button>
     </div>
 
     <div class="bookmark-bar" id="bookmarkBar" style="display:none;">
@@ -429,11 +451,11 @@
     <div id="quranSection" style="display:none;">
       <div class="controls-grid">
         <div class="select-box">
-          <label style="display:block; font-size:0.75rem; font-weight:700; color:var(--text-muted); margin-bottom:3px;">🎙️ اختيار القارئ:</label>
+          <label style="display:block; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:4px;">🎙️ اختيار القارئ:</label>
           <select id="reciterSelect"></select>
         </div>
         <div class="search-box">
-          <input type="text" id="searchInput" placeholder="ابحث باسم السورة...">
+          <input type="text" id="searchInput" placeholder="ابحث باسم السورة (مثلاً: الكهف)...">
         </div>
       </div>
       <div class="reciter-toolbar">
@@ -444,11 +466,11 @@
 
     <div id="searchSection" style="display:none;">
       <div class="ayah-search-box">
-        <input type="text" id="ayahSearchInput" placeholder="اكتب كلمة للبحث في القرآن...">
+        <input type="text" id="ayahSearchInput" placeholder="اكتب أي كلمة قرآنية للبحث...">
         <button class="btn btn-play" onclick="searchAyat()">بحث</button>
       </div>
       <div id="ayahSearchResults">
-        <div style="text-align: center; color: var(--text-muted); padding: 20px;">اكتب كلمة واضغط بحث للوصول للآيات.</div>
+        <div style="text-align: center; color: var(--text-muted); padding: 25px;">اكتب كلمة أو جملة واضغط "بحث" للوصول إلى الآيات.</div>
       </div>
     </div>
 
@@ -457,20 +479,20 @@
         <div class="creator-tag">by Mahmoud Helal</div>
         <div class="radio-avatar">📻</div>
         <h2>إذاعة القرآن الكريم</h2>
-        <p>بث مباشر لتلاوات عطرة 24 ساعة</p>
+        <p>بث مباشر لتلاوات عطرة من كتاب الله الحكيم</p>
 
-        <div style="margin-bottom:14px; text-align:right;">
-          <label style="display:block; font-size:0.82rem; font-weight:700; margin-bottom:6px;">اختر المحطة:</label>
-          <select id="radioStationSelect" onchange="changeRadioStation()" style="width:100%; padding:10px; border:1px solid var(--border); border-radius:10px; background:var(--bg); color:var(--text); font-size:0.9rem; outline:none; cursor:pointer;">
+        <div style="margin-bottom:16px; text-align:right;">
+          <label style="display:block; font-size:0.88rem; font-weight:700; margin-bottom:8px;">اختر المحطة الإذاعية:</label>
+          <select id="radioStationSelect" onchange="changeRadioStation()" style="width:100%; padding:11px 14px; border:1px solid var(--border); border-radius:12px; background:var(--bg); color:var(--text); font-size:0.95rem; font-weight:600; outline:none; cursor:pointer;">
             <option value="cairo" selected>📻 إذاعة القرآن الكريم من القاهرة</option>
-            <option value="makkah">🕋 إذاعة القرآن الكريم من مكة المكرمة</option>
-            <option value="tarateel">🎙️ تلاوات خاشعة منوعة</option>
+            <option value="makkah">🕋 إذاعة القرآن الكريم من مكة المكرمة (السعودية)</option>
+            <option value="tarateel">🎙️ تلاوات خاشعة منوعة (24 ساعة)</option>
             <option value="roqiah">🛡️ إذاعة الرقية الشرعية</option>
           </select>
         </div>
 
         <button class="radio-toggle-btn" id="radioPlayBtn" onclick="toggleRadioPlay()">▶️ تشغيل الإذاعة</button>
-        <div id="radioStatusText" style="font-size:0.8rem; color:var(--text-muted); margin-top:6px; display:none;"></div>
+        <div id="radioStatusText" style="font-size:0.84rem; color:var(--text-muted); margin-top:8px; display:none;"></div>
         <audio id="liveRadioAudio" preload="none" playsinline></audio>
       </div>
       <div class="charity-banner">🌿 صدقة جارية — لا تنسونا من صالح دعائكم</div>
@@ -478,63 +500,82 @@
 
     <div id="azkarSection" class="azkar-container">
       <div class="azkar-filter">
-        <button class="filter-chip active" id="chipMorning" onclick="loadAzkarCategory('morning')">الصباح</button>
-        <button class="filter-chip" id="chipEvening" onclick="loadAzkarCategory('evening')">المساء</button>
-        <button class="filter-chip" id="chipSleep" onclick="loadAzkarCategory('sleep')">النوم</button>
-        <button class="filter-chip" id="chipAfterPrayer" onclick="loadAzkarCategory('after_prayer')">بعد الصلاة</button>
-        <button class="filter-chip" id="chipDuas" onclick="loadAzkarCategory('duas')">📖 أدعية</button>
-        <button class="filter-chip" id="chipProphetic" onclick="loadAzkarCategory('prophetic_duas')">🤲 نبوية</button>
-        <button class="filter-chip" id="chipTasbeeh" onclick="showTasbeehCounter()">📿 السبحة</button>
+        <button class="filter-chip active" id="chipMorning" onclick="loadAzkarCategory('morning')">أذكار الصباح</button>
+        <button class="filter-chip" id="chipEvening" onclick="loadAzkarCategory('evening')">أذكار المساء</button>
+        <button class="filter-chip" id="chipSleep" onclick="loadAzkarCategory('sleep')">أذكار النوم</button>
+        <button class="filter-chip" id="chipAfterPrayer" onclick="loadAzkarCategory('after_prayer')">أذكار بعد الصلاة</button>
+        <button class="filter-chip" id="chipDuas" onclick="loadAzkarCategory('duas')">📖 أدعية قرآنية</button>
+        <button class="filter-chip" id="chipProphetic" onclick="loadAzkarCategory('prophetic_duas')">🤲 أدعية نبوية</button>
+        <button class="filter-chip" id="chipTasbeeh" onclick="showTasbeehCounter()">📿 السبحة الإلكترونية</button>
       </div>
       <div id="azkarList"></div>
 
       <div class="tasbeeh-box" id="tasbeehBox">
-        <h3>📿 السبحة الإلكترونية</h3>
+        <h3>📿 السبحة الإلكترونية الحرة</h3>
         <div class="tasbeeh-ring" id="tasbeehRing" onclick="incrementTasbeeh()">
           <span class="tasbeeh-counter-num" id="tasbeehCount">0</span>
-          <span style="font-size:0.75rem; color:var(--text-muted); margin-top:2px;">اضغط للتسبيح</span>
+          <span style="font-size:0.8rem; color:var(--text-muted); margin-top:4px;">اضغط للتسبيح</span>
         </div>
-        <div style="display:flex; justify-content:space-around; align-items:center; margin-top:10px; font-size:0.82rem; font-weight:700;">
-          <span>الدورات: <b id="tasbeehLaps" style="color:var(--primary);">0</b></span>
+        <div style="display:flex; justify-content:space-around; align-items:center; margin-top:14px; font-size:0.88rem; font-weight:700;">
+          <span>الدورات المكتملة: <b id="tasbeehLaps" style="color:var(--primary);">0</b></span>
           <span>الإجمالي: <b id="tasbeehTotal" style="color:var(--accent);">0</b></span>
         </div>
-        <div style="margin-top:12px;">
-          <button class="btn btn-read" style="padding:6px 14px;" onclick="resetTasbeeh()">🔄 إعادة ضبط</button>
+        <div style="margin-top:16px;">
+          <button class="btn btn-read" style="padding:8px 18px;" onclick="resetTasbeeh()">🔄 إعادة ضبط العداد</button>
         </div>
       </div>
     </div>
 
+    <!-- قسم التواصل بالوسيلتين (واتساب وبريد إلكتروني) -->
     <div id="contactSection" class="contact-section" style="display:none; flex-direction:column; align-items:center;">
       <div class="contact-card">
         <h2>📩 تواصل معنا واقتراحاتك</h2>
-        <p style="font-size:0.88rem; color:var(--text-muted); margin-bottom:14px;">نسعد باستقبال اقتراحاتكم وملاحظاتكم.</p>
-        <form id="feedbackForm" onsubmit="handleFeedbackSubmit(event)" style="display:flex; flex-direction:column; gap:10px; text-align:right;">
+        <p style="font-size:0.92rem; color:var(--text-muted); margin-bottom:18px;">نسعد باستقبال اقتراحاتكم، طلبات إضافة قراء جدد، أو الإبلاغ عن أي مشكلة تقنية.</p>
+        <form id="feedbackForm" onsubmit="handleFeedbackSubmit(event)" style="display:flex; flex-direction:column; gap:12px; text-align:right;">
           <div>
-            <label style="display:block; font-size:0.82rem; font-weight:700; margin-bottom:4px;">نوع الرسالة:</label>
-            <select id="msgType" style="width:100%; padding:9px; border:1px solid var(--border); border-radius:8px; background:var(--card-bg); color:var(--text);">
-              <option value="طلب إضافة قارئ">🎙️ طلب إضافة قارئ</option>
-              <option value="اقتراح فكرة أو ميزة">💡 اقتراح تطوير</option>
-              <option value="الإبلاغ عن مشكلة">⚠️ الإبلاغ عن مشكلة</option>
+            <label style="display:block; font-size:0.88rem; font-weight:700; margin-bottom:6px;">نوع الرسالة:</label>
+            <select id="msgType" style="width:100%; padding:11px 14px; border:1px solid var(--border); border-radius:10px; background:var(--card-bg); color:var(--text); outline:none;">
+              <option value="طلب إضافة قارئ">🎙️ طلب إضافة قارئ جديد</option>
+              <option value="اقتراح فكرة أو ميزة">💡 اقتراح فكرة أو تطوير</option>
+              <option value="الإبلاغ عن مشكلة">⚠️ الإبلاغ عن عطل أو مشكلة</option>
+              <option value="رسالة عامة / شكر">✉️ رسالة عامة / شكر</option>
             </select>
           </div>
           <div>
-            <label style="display:block; font-size:0.82rem; font-weight:700; margin-bottom:4px;">اسمك الكريم:</label>
-            <input type="text" id="senderName" required placeholder="اكتب اسمك..." style="width:100%; padding:9px; border:1px solid var(--border); border-radius:8px; background:var(--card-bg); color:var(--text);">
+            <label style="display:block; font-size:0.88rem; font-weight:700; margin-bottom:6px;">اسمك الكريم:</label>
+            <input type="text" id="senderName" required placeholder="اكتب اسمك هنا..." style="width:100%; padding:11px 14px; border:1px solid var(--border); border-radius:10px; background:var(--card-bg); color:var(--text); outline:none;">
           </div>
           <div>
-            <label style="display:block; font-size:0.82rem; font-weight:700; margin-bottom:4px;">الرسالة:</label>
-            <textarea id="msgBody" required rows="3" placeholder="اكتب التفاصيل..." style="width:100%; padding:9px; border:1px solid var(--border); border-radius:8px; background:var(--card-bg); color:var(--text); resize:vertical;"></textarea>
+            <label style="display:block; font-size:0.88rem; font-weight:700; margin-bottom:6px;">وسيلة تواصل (اختياري):</label>
+            <input type="text" id="senderContact" placeholder="بريدك الإلكتروني أو رقم الواتساب..." style="width:100%; padding:11px 14px; border:1px solid var(--border); border-radius:10px; background:var(--card-bg); color:var(--text); outline:none;">
           </div>
-          <button type="submit" class="btn btn-play" style="padding:10px; font-size:0.9rem; margin-top:4px;">💬 إرسال عبر واتساب</button>
+          <div>
+            <label style="display:block; font-size:0.88rem; font-weight:700; margin-bottom:6px;">تفاصيل الرسالة أو الاقتراح:</label>
+            <textarea id="msgBody" required rows="4" placeholder="اكتب رسالتك هنا..." style="width:100%; padding:11px 14px; border:1px solid var(--border); border-radius:10px; background:var(--card-bg); color:var(--text); outline:none; resize:vertical;"></textarea>
+          </div>
+          <div style="display:flex; gap:10px; margin-top:8px;">
+            <button type="submit" class="btn btn-play" style="flex:1; padding:12px; font-size:0.95rem;">💬 إرسال عبر واتساب</button>
+            <button type="button" onclick="sendViaEmail()" class="btn btn-read" style="flex:1; padding:12px; font-size:0.95rem;">📧 إرسال عبر الإيميل</button>
+          </div>
         </form>
       </div>
     </div>
   </div>
 
-  <footer style="text-align: center; margin: 30px auto 16px; padding: 18px 12px; max-width: 900px; background: var(--card-bg); border: 1px solid var(--border); border-radius: 14px;">
-    <div style="font-size: 0.98rem; font-weight: 700; color: var(--primary); margin-bottom: 6px;">🌿 صدقة جارية خالصة لوجه الله تعالى</div>
-    <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6; margin-bottom: 8px;">نسألكم صالح الدعاء بالرحمة والمغفرة.</p>
-    <div style="display: inline-block; padding: 4px 12px; background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 16px; font-size: 0.82rem; font-weight: 700; color: var(--primary);">
+  <!-- التذييل الأصلي الكامل مع نص الصدقة الجارية بحجمه الكامل -->
+  <footer style="
+    text-align: center; margin: 40px auto 20px; padding: 24px 15px; max-width: 900px;
+    background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; box-shadow: 0 4px 14px rgba(0,0,0,0.03);
+  ">
+    <div style="font-size: 1.05rem; font-weight: 700; color: var(--primary); margin-bottom: 8px;">
+      🌿 صدقة جارية خالصة لوجه الله تعالى
+    </div>
+    <p style="font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 12px;">
+      اللهم اجعل هذا العمل خالصاً لوجهك الكريم، وتقبله صدقة جارية عنا وعن والدينا وأهلينا وكل من ساهم في نشره واستمع إليه.. نسألكم صالح الدعاء بالرحمة والمغفرة.
+    </p>
+    <div style="
+      display: inline-block; padding: 6px 16px; background: var(--accent-soft); border: 1px solid var(--accent); border-radius: 20px; font-size: 0.88rem; font-weight: 700; color: var(--primary);
+    ">
       تم التصميم والتطوير بواسطة: <span style="color: var(--accent); font-weight: 800;">Mahmoud Helal</span>
     </div>
   </footer>
@@ -546,18 +587,18 @@
         <div class="modal-actions">
           <button class="font-ctrl-btn" onclick="changeFontSize(1)">A+</button>
           <button class="font-ctrl-btn" onclick="changeFontSize(-1)">A-</button>
-          <button class="icon-btn" onclick="saveCurrentBookmark()" title="حفظ الموضع" style="width:28px; height:28px; font-size:0.8rem;">📌</button>
-          <button class="icon-btn" onclick="closeModal()" title="إغلاق" style="width:28px; height:28px; font-size:0.8rem;">&times;</button>
+          <button class="icon-btn" onclick="saveCurrentBookmark()" title="حفظ الموضع" style="width:32px; height:32px; font-size:0.9rem;">📌</button>
+          <button class="icon-btn" onclick="closeModal()" title="إغلاق" style="width:32px; height:32px; font-size:0.9rem;">&times;</button>
         </div>
       </div>
-      <div class="modal-body" id="modalSurahBody">جاري التحميل...</div>
+      <div class="modal-body" id="modalSurahBody">جاري تحميل الآيات...</div>
       <div class="tafsir-box" id="tafsirBox">
         <div class="tafsir-title">
           <span id="tafsirAyahHeader">التفسير الميسر</span>
           <div class="tafsir-tools">
             <button class="tafsir-tool-btn" onclick="copyAyahWithTafsir()">📋 نسخ</button>
             <button class="tafsir-tool-btn" id="shareStoryBtn" onclick="shareAyahWithTafsir()">📸 ستوري</button>
-            <button class="icon-btn" style="width:22px; height:22px; font-size:11px; background:none; border:none; color:var(--text);" onclick="closeTafsir()">✕</button>
+            <button class="icon-btn" style="width:24px; height:24px; font-size:12px; background:none; border:none; color:var(--text);" onclick="closeTafsir()">✕</button>
           </div>
         </div>
         <div id="tafsirContent">اضغط على أي آية لعرض تفسيرها...</div>
@@ -566,15 +607,15 @@
   </div>
 
   <div class="modal-overlay" id="storyPreviewModal" style="display:none; z-index:3000;">
-    <div class="modal-content" style="max-width: 380px; text-align: center; padding: 14px; border-radius: 16px; background:var(--modal-bg);">
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
-        <h3 style="font-size:0.98rem; font-weight:700; color:var(--primary); margin:0;">📸 معاينة الستوري</h3>
-        <button class="icon-btn" style="color:var(--text); background:none; border:none; font-size:1.2rem; cursor:pointer;" onclick="closeStoryModal()">&times;</button>
+    <div class="modal-content" style="max-width: 400px; text-align: center; padding: 18px; border-radius: 20px; background:var(--modal-bg);">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+        <h3 style="font-size:1.05rem; font-weight:700; color:var(--primary); margin:0;">📸 بطاقة الستوري جاهزة</h3>
+        <button class="icon-btn" style="color:var(--text); background:none; border:none; font-size:1.4rem; cursor:pointer;" onclick="closeStoryModal()">&times;</button>
       </div>
-      <div style="margin-bottom:10px; max-height:50vh; overflow-y:auto; border-radius:10px; border:1px solid var(--border);">
-        <img id="storyPreviewImg" style="width:100%; height:auto; display:block; border-radius:10px;" src="" alt="ستوري">
+      <div style="margin-bottom:14px; max-height:56vh; overflow-y:auto; border-radius:12px; border:1px solid var(--border);">
+        <img id="storyPreviewImg" style="width:100%; height:auto; display:block; border-radius:12px;" src="" alt="معاينة الستوري">
       </div>
-      <button class="btn btn-read" style="width:100%; padding:10px; font-size:0.85rem;" onclick="downloadStoryImage()">📥 حفظ الصورة في الهاتف</button>
+      <button class="btn btn-read" style="width:100%; padding:12px; font-size:0.9rem;" onclick="downloadStoryImage()">📥 حفظ الصورة في الهاتف</button>
     </div>
   </div>
 
@@ -594,12 +635,12 @@
   </div>
 
   <div class="dhikr-toast" id="dhikrToast">
-    <span style="font-size:1.4rem;">🌿</span>
+    <span style="font-size:1.6rem;">🌿</span>
     <div style="flex:1; text-align:right;">
-      <div style="font-size:0.7rem; color:var(--accent); font-weight:bold;">تذكير</div>
-      <div id="dhikrToastText" style="font-size:0.85rem; font-weight:700; color:var(--text); line-height:1.3;">اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ ﷺ</div>
+      <div style="font-size:0.75rem; color:var(--accent); font-weight:bold;">تذكير</div>
+      <div id="dhikrToastText" style="font-size:0.92rem; font-weight:700; color:var(--text); line-height:1.4;">اللَّهُمَّ صَلِّ وَسَلِّمْ عَلَى نَبِيِّنَا مُحَمَّدٍ ﷺ</div>
     </div>
-    <button onclick="dismissDhikrToast()" style="background:none; border:none; font-size:1rem; cursor:pointer; color:var(--text-muted);">&times;</button>
+    <button onclick="dismissDhikrToast()" style="background:none; border:none; font-size:1.1rem; cursor:pointer; color:var(--text-muted);">&times;</button>
   </div>
 
   <script>
@@ -635,7 +676,7 @@
 
     let currentSurahIndex = 0;
     let activeModalSurahId = 1;
-    let currentReaderFontSize = 1.3;
+    let currentReaderFontSize = 1.4;
     let currentAyahTextForShare = "";
     let currentTafsirTextForShare = "";
 
@@ -759,7 +800,7 @@
     }
 
     function changeFontSize(delta) {
-      currentReaderFontSize = Math.max(1.1, Math.min(2.2, currentReaderFontSize + (delta * 0.15)));
+      currentReaderFontSize = Math.max(1.1, Math.min(2.4, currentReaderFontSize + (delta * 0.15)));
       modalSurahBody.style.fontSize = `${currentReaderFontSize}rem`;
     }
 
@@ -767,7 +808,7 @@
     async function readSurah(surahId, name) {
       activeModalSurahId = surahId;
       modalSurahTitle.innerText = name;
-      modalSurahBody.innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 20px;">جاري التحميل...</div>';
+      modalSurahBody.innerHTML = '<div style="text-align: center; color: var(--text-muted); padding: 30px;">جاري تحميل الآيات...</div>';
       closeTafsir();
       readerModal.style.display = "flex";
       currentSurahAyahsMap = {};
@@ -1068,7 +1109,7 @@
       });
     }
 
-    // باقي الدول والمدن العربية والعالمية الشاملة
+    // جميع الدول والمدن العربية والعالمية الكاملة
     const locations = [
       { country: "مصر", enCountry: "Egypt", method: 5, cities: [
           { ar: "القاهرة", en: "Cairo" }, { ar: "الإسكندرية", en: "Alexandria" }, { ar: "الجيزة", en: "Giza" },
@@ -1239,13 +1280,11 @@
           document.getElementById("maghribTime").innerText = t.Maghrib;
           document.getElementById("ishaTime").innerText = t.Isha;
 
-          // التحقق من حلول وقت الصلاة لتشغيل صوت الأذان
           checkAdhanTime(t);
         }
       } catch(e) {}
     }
 
-    // فحص وقت الصلاة وتشغيل الأذان
     function checkAdhanTime(timings) {
       const now = new Date();
       const currentH = String(now.getHours()).padStart(2, '0');
@@ -1255,7 +1294,6 @@
       if (currentHM !== lastCheckedMinute) {
         const prayerTimes = [timings.Fajr, timings.Dhuhr, timings.Asr, timings.Maghrib, timings.Isha];
         prayerTimes.forEach(pTime => {
-          // تنسيق وقت الصلاة (قد يأتي بصيغة HH:mm مع أو بدون ثواني)
           if (pTime && pTime.substring(0, 5) === currentHM) {
             lastCheckedMinute = currentHM;
             if (adhanAudio) {
@@ -1267,10 +1305,7 @@
       }
     }
 
-    // فحص المواقيت كل 30 ثانية
-    setInterval(() => {
-      saveAndFetchPrayers();
-    }, 30000);
+    setInterval(saveAndFetchPrayers, 30000);
 
     themeBtn.addEventListener("click", () => {
       document.body.classList.toggle("dark-mode");
@@ -1285,13 +1320,23 @@
     }
 
     const MY_WHATSAPP_NUMBER = "201122127606";
+    const MY_EMAIL_ADDRESS = "mahmoudhelal310@gmail.com";
+
     function handleFeedbackSubmit(e) {
       e.preventDefault();
       const type = document.getElementById("msgType").value;
       const name = document.getElementById("senderName").value.trim();
+      const contact = document.getElementById("senderContact").value.trim() || "لم يذكر";
       const body = document.getElementById("msgBody").value.trim();
-      const text = `السلام عليكم،\nرسالة جديدة من زائر بوابة القرآن:\n\n📌 النوع: ${type}\n👤 الاسم: ${name}\n\n📝 الرسالة:\n${body}`;
+      const text = `السلام عليكم،\nرسالة جديدة من زائر بوابة القرآن:\n\n📌 النوع: ${type}\n👤 الاسم: ${name}\n📞 التواصل: ${contact}\n\n📝 الرسالة:\n${body}`;
       window.open(`https://wa.me/${MY_WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`, '_blank');
+    }
+
+    function sendViaEmail() {
+      const name = document.getElementById("senderName").value.trim();
+      const body = document.getElementById("msgBody").value.trim();
+      if (!name || !body) { alert("يرجى ملء الاسم وتفاصيل الرسالة أولاً."); return; }
+      window.location.href = `mailto:${MY_EMAIL_ADDRESS}?subject=${encodeURIComponent("رسالة من بوابة القرآن")}&body=${encodeURIComponent(body)}`;
     }
 
     window.addEventListener('DOMContentLoaded', () => {
